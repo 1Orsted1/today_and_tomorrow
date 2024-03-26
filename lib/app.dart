@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:today_and_tomorrow/i18n/strings.g.dart';
 import 'package:today_and_tomorrow/injection.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
+
 import 'package:today_and_tomorrow/theme.dart';
 
 class App extends StatefulWidget {
@@ -21,6 +24,13 @@ class _AppState extends State<App> {
         colorScheme: AppTheme.coloScheme,
         appBarTheme: AppTheme.appBarTheme,
       ),
+      locale: TranslationProvider.of(context).flutterLocale, // use provider
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       routerConfig: _router.config(),
     );
   }
