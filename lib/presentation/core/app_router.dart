@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
+import 'package:today_and_tomorrow/presentation/add_habit/add_habit_screen.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/dashboard_screen.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/goals/goals.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/home/home_screen.dart';
@@ -17,5 +18,6 @@ class AppRouter extends _$AppRouter {
           AutoRoute(page: StatisticRoute.page),
           AutoRoute(page: GoalRoute.page),
         ]),
+        AutoRoute(page: AddHabitRoute.page),
       ];
 }
