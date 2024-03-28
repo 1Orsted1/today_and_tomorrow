@@ -4,5 +4,10 @@
   "login": {
     "success": "Logged in successfully",
     "fail": "Logged in failed"
+  },
+  "bottomBarTitles":{
+    "statistics":"Statistics",
+    "home": "Home",
+    "goals":"Goals"
   }
 }

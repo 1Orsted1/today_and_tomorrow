@@ -4,6 +4,11 @@
     "login": {
       "success": "Registro completado",
       "fail": "Registro fallido"
+    },
+    "bottomBarTitles":{
+      "statistics":"Estadisticas",
+      "home": "Principal",
+      "goals":"Metas"
     }
   }
   

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 8 (4 per locale)
+/// Strings: 14 (7 per locale)
 ///
-/// Built on 2024-03-26 at 05:11 UTC
+/// Built on 2024-03-26 at 17:34 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -151,6 +151,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String hello({required Object name}) => 'Hello ${name}';
 	String get save => 'Save';
 	late final _StringsLoginEn login = _StringsLoginEn._(_root);
+	late final _StringsBottomBarTitlesEn bottomBarTitles = _StringsBottomBarTitlesEn._(_root);
 }
 
 // Path: login
@@ -162,6 +163,18 @@ class _StringsLoginEn {
 	// Translations
 	String get success => 'Logged in successfully';
 	String get fail => 'Logged in failed';
+}
+
+// Path: bottomBarTitles
+class _StringsBottomBarTitlesEn {
+	_StringsBottomBarTitlesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get statistics => 'Statistics';
+	String get home => 'Home';
+	String get goals => 'Goals';
 }
 
 // Path: <root>
@@ -191,6 +204,7 @@ class _StringsEs implements Translations {
 	@override String hello({required Object name}) => 'Hola ${name}';
 	@override String get save => 'guardar';
 	@override late final _StringsLoginEs login = _StringsLoginEs._(_root);
+	@override late final _StringsBottomBarTitlesEs bottomBarTitles = _StringsBottomBarTitlesEs._(_root);
 }
 
 // Path: login
@@ -204,6 +218,18 @@ class _StringsLoginEs implements _StringsLoginEn {
 	@override String get fail => 'Registro fallido';
 }
 
+// Path: bottomBarTitles
+class _StringsBottomBarTitlesEs implements _StringsBottomBarTitlesEn {
+	_StringsBottomBarTitlesEs._(this._root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get statistics => 'Estadisticas';
+	@override String get home => 'Principal';
+	@override String get goals => 'Metas';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -214,6 +240,9 @@ extension on Translations {
 			case 'save': return 'Save';
 			case 'login.success': return 'Logged in successfully';
 			case 'login.fail': return 'Logged in failed';
+			case 'bottomBarTitles.statistics': return 'Statistics';
+			case 'bottomBarTitles.home': return 'Home';
+			case 'bottomBarTitles.goals': return 'Goals';
 			default: return null;
 		}
 	}
@@ -226,6 +255,9 @@ extension on _StringsEs {
 			case 'save': return 'guardar';
 			case 'login.success': return 'Registro completado';
 			case 'login.fail': return 'Registro fallido';
+			case 'bottomBarTitles.statistics': return 'Estadisticas';
+			case 'bottomBarTitles.home': return 'Principal';
+			case 'bottomBarTitles.goals': return 'Metas';
 			default: return null;
 		}
 	}
