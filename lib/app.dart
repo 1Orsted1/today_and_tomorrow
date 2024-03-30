@@ -21,8 +21,10 @@ class _AppState extends State<App> {
     return MaterialApp.router(
       theme: ThemeData(
         fontFamily: 'Urbanist',
-        colorScheme: AppTheme.coloScheme,
+        colorScheme: AppTheme.colorScheme,
         appBarTheme: AppTheme.appBarTheme,
+        elevatedButtonTheme: AppTheme.elevatedButtonStyle,
+        inputDecorationTheme: AppTheme.inputDecorationTheme,
       ),
       locale: TranslationProvider.of(context).flutterLocale, // use provider
       supportedLocales: AppLocaleUtils.supportedLocales,
