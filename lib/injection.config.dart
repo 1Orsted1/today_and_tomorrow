@@ -11,7 +11,8 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'presentation/core/app_router.dart' as _i3;
+import 'aplication/add_habit/bloc/add_habit_bloc.dart' as _i3;
+import 'presentation/core/app_router.dart' as _i4;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -24,7 +25,8 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.AppRouter>(() => _i3.AppRouter());
+    gh.factory<_i3.AddHabitBloc>(() => _i3.AddHabitBloc());
+    gh.factory<_i4.AppRouter>(() => _i4.AppRouter());
     return this;
   }
 }

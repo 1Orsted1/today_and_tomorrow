@@ -80,6 +80,14 @@ class AppTheme {
         return TextStyle(color: color, letterSpacing: 1.3);
       },
     ),
+    suffixIconColor: MaterialStateColor.resolveWith(
+      (Set<MaterialState> states) {
+        Color color = colorScheme.primary;
+        if (states.contains(MaterialState.error)) color = colorScheme.error;
+        if (states.isEmpty) color = colorScheme.secondary;
+        return color;
+      },
+    ),
     fillColor: colorScheme.background,
     filled: true,
   );

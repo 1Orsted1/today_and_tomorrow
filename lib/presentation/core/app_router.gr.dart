@@ -18,7 +18,7 @@ abstract class _$AppRouter extends RootStackRouter {
     AddHabitRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddHabitScreen(),
+        child: WrappedRoute(child: const AddHabitScreen()),
       );
     },
     DashBoardRoute.name: (routeData) {
