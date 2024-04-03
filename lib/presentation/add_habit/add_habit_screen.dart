@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:today_and_tomorrow/aplication/add_habit/bloc/add_habit_bloc.dart';
+import 'package:today_and_tomorrow/injection.dart';
 
 @RoutePage()
 class AddHabitScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -12,7 +13,7 @@ class AddHabitScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddHabitBloc(),
+      create: (context) => getIt<AddHabitBloc>(),
       child: this,
     );
   }
