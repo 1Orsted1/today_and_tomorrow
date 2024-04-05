@@ -11,7 +11,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'aplication/add_habit/bloc/add_habit_bloc.dart' as _i9;
+import 'aplication/add_habit/add_habit_bloc.dart' as _i9;
 import 'domain/add_habit/i_add_habit_data_source.dart' as _i5;
 import 'domain/add_habit/i_add_habit_facade.dart' as _i7;
 import 'infraestructure/add_habit/add_habit_data_source_imp.dart' as _i6;

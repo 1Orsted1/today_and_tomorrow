@@ -6,4 +6,6 @@ class AddHabitEvent with _$AddHabitEvent {
     required String name,
     required DateTime hour,
   }) = _NewHabit;
+
+  const factory AddHabitEvent.getAll() = _GetAllHabits;
 }

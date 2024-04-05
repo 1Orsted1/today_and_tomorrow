@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:today_and_tomorrow/aplication/add_habit/add_habit_bloc.dart';
 import 'package:today_and_tomorrow/i18n/strings.g.dart';
 import 'package:today_and_tomorrow/injection.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
@@ -18,22 +20,29 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        fontFamily: 'Urbanist',
-        colorScheme: AppTheme.colorScheme,
-        appBarTheme: AppTheme.appBarTheme,
-        elevatedButtonTheme: AppTheme.elevatedButtonStyle,
-        inputDecorationTheme: AppTheme.inputDecorationTheme,
-      ),
-      locale: TranslationProvider.of(context).flutterLocale, // use provider
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AddHabitBloc>(),
+        ),
       ],
-      routerConfig: _router.config(),
+      child: MaterialApp.router(
+        theme: ThemeData(
+          fontFamily: 'Urbanist',
+          colorScheme: AppTheme.colorScheme,
+          appBarTheme: AppTheme.appBarTheme,
+          elevatedButtonTheme: AppTheme.elevatedButtonStyle,
+          inputDecorationTheme: AppTheme.inputDecorationTheme,
+        ),
+        locale: TranslationProvider.of(context).flutterLocale, // use provider
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        routerConfig: _router.config(),
+      ),
     );
   }
 }

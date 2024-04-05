@@ -17,4 +17,9 @@ class AddHabitFacadeImp implements IAddHabitFacade {
   Future<void> storeJournal(Habit newHabit) async {
     dataSource.storeJournal(newHabit);
   }
+
+  @override
+  Stream<List<Habit>> getAllHabits() {
+    return dataSource.getAllHabits();
+  }
 }
