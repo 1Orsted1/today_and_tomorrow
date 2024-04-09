@@ -15,26 +15,31 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'domain/add_habit/habit.dart';
+import '../../../domain/habit/habit.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 1336974525038082238),
+      id: const obx_int.IdUid(1, 5908401262347548688),
       name: 'Habit',
-      lastPropertyId: const obx_int.IdUid(2, 8844554982051298868),
+      lastPropertyId: const obx_int.IdUid(3, 5736707040038799173),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 3109801462183049842),
+            id: const obx_int.IdUid(1, 8705748372811113305),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 8844554982051298868),
+            id: const obx_int.IdUid(2, 2228197234354718011),
             name: 'name',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 5736707040038799173),
+            name: 'hour',
+            type: 10,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -76,13 +81,13 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(2, 1336974525038082238),
+      lastEntityId: const obx_int.IdUid(1, 5908401262347548688),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [9210534675487724911],
+      retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [208360063124503801, 2063062276669190047],
+      retiredPropertyUids: const [],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -99,9 +104,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Habit object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(3);
+          fbb.startTable(4);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
+          fbb.addInt64(2, object.hour.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -110,9 +116,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final nameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
+          final hourParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0));
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final object = Habit(nameParam, id: idParam);
+          final object = Habit(nameParam, hourParam, id: idParam);
 
           return object;
         })
@@ -129,4 +137,7 @@ class Habit_ {
   /// see [Habit.name]
   static final name =
       obx.QueryStringProperty<Habit>(_entities[0].properties[1]);
+
+  /// see [Habit.hour]
+  static final hour = obx.QueryDateProperty<Habit>(_entities[0].properties[2]);
 }

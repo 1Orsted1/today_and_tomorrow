@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:today_and_tomorrow/aplication/add_habit/add_habit_bloc.dart';
+import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
 import 'package:today_and_tomorrow/i18n/strings.g.dart';
 import 'package:today_and_tomorrow/injection.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
@@ -23,7 +23,10 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AddHabitBloc>(),
+          create: (context) => getIt<HabitBloc>()
+            ..add(
+              const HabitEvent.getAll(),
+            ),
         ),
       ],
       child: MaterialApp.router(

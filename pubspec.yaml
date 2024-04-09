@@ -46,10 +46,13 @@ dev_dependencies:
 
 
 
+objectbox:
+  output_dir: infraestructure/core/objectbox
 
 flutter:
   generate: true 
   uses-material-design: true
+
 
   fonts:
     - family: Urbanist

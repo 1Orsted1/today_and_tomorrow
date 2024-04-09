@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:today_and_tomorrow/objectbox.g.dart';
+import 'package:today_and_tomorrow/infraestructure/core/objectbox/objectbox.g.dart';
 
 @module
 abstract class ObjectBoxInjectableModule {

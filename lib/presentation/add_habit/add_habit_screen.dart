@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:today_and_tomorrow/aplication/add_habit/add_habit_bloc.dart';
-import 'package:today_and_tomorrow/injection.dart';
+import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
 
 @RoutePage()
 class AddHabitScreen extends StatelessWidget {
@@ -13,11 +12,10 @@ class AddHabitScreen extends StatelessWidget {
 
   void _addHabit(
     BuildContext context, {
-    required String name,
-    required DateTime hour,
+    required Map<String, dynamic> formData,
   }) {
-    final bloc = context.read<AddHabitBloc>();
-    bloc.add(AddHabitEvent.newHabit(name: name, hour: hour));
+    final bloc = context.read<HabitBloc>();
+    bloc.add(HabitEvent.newHabit(formData: formData));
   }
 
   @override
@@ -26,8 +24,8 @@ class AddHabitScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     FormGroup formGroup = FormGroup(
       {
-        "habitName": FormControl<String>(validators: [Validators.required]),
-        "habitHour": FormControl<DateTime>(validators: [Validators.required]),
+        "name": FormControl<String>(validators: [Validators.required]),
+        "hour": FormControl<DateTime>(validators: [Validators.required]),
       },
     );
     return Scaffold(
@@ -41,107 +39,112 @@ class AddHabitScreen extends StatelessWidget {
           icon: const Icon(Icons.close),
         ),
       ),
-      body: ReactiveForm(
-        formGroup: formGroup,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const Gap(12),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: SizedBox(
-                        child: ReactiveTextField(
-                          //cursorHeight: 20,
-                          formControlName: "habitName",
-                          decoration: const InputDecoration(
-                            labelText: "nombre",
+      body: BlocListener<HabitBloc, HabitState>(
+        listenWhen: (prev, current) =>
+            !prev.habitJustCreated && current.habitJustCreated,
+        listener: (context, state) {
+          context.router.maybePop();
+        },
+        child: ReactiveForm(
+          formGroup: formGroup,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Gap(12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: SizedBox(
+                          child: ReactiveTextField(
+                            //cursorHeight: 20,
+                            formControlName: "name",
+                            decoration: const InputDecoration(
+                              labelText: "nombre",
+                            ),
+                            style: MaterialStateTextStyle.resolveWith(
+                              (Set<MaterialState> states) {
+                                final Color color = states
+                                        .contains(MaterialState.focused)
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.secondary;
+                                return TextStyle(
+                                    color: color, letterSpacing: 1.3);
+                              },
+                            ),
                           ),
-                          style: MaterialStateTextStyle.resolveWith(
-                            (Set<MaterialState> states) {
-                              final Color color =
-                                  states.contains(MaterialState.focused)
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context).colorScheme.secondary;
-                              return TextStyle(
-                                  color: color, letterSpacing: 1.3);
+                        ),
+                      ),
+                      const Gap(24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: SizedBox(
+                          child: ReactiveDateTimePicker(
+                            formControlName: 'hour',
+                            type: ReactiveDatePickerFieldType.time,
+                            timePickerEntryMode: TimePickerEntryMode.inputOnly,
+                            style: TextStyle(
+                              color: MaterialStateColor.resolveWith(
+                                (Set<MaterialState> states) {
+                                  Color color = colorScheme.primary;
+                                  if (states.contains(MaterialState.error)) {
+                                    color = colorScheme.error;
+                                  }
+                                  if (states.isEmpty) {
+                                    color = colorScheme.secondary;
+                                  }
+                                  return color;
+                                },
+                              ),
+                            ),
+                            decoration: const InputDecoration(
+                              labelText: 'hora',
+                              suffixIcon: Icon(Icons.watch_later_outlined),
+                            ),
+                            builder: (BuildContext context, Widget? child) {
+                              return Theme(
+                                data: Theme.of(context).copyWith(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                child: Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: MediaQuery(
+                                    data: MediaQuery.of(context).copyWith(
+                                      alwaysUse24HourFormat: true,
+                                    ),
+                                    child: child!,
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ),
                       ),
-                    ),
-                    const Gap(24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: SizedBox(
-                        child: ReactiveDateTimePicker(
-                          formControlName: 'habitHour',
-                          type: ReactiveDatePickerFieldType.time,
-                          timePickerEntryMode: TimePickerEntryMode.inputOnly,
-                          style: TextStyle(
-                            color: MaterialStateColor.resolveWith(
-                              (Set<MaterialState> states) {
-                                Color color = colorScheme.primary;
-                                if (states.contains(MaterialState.error)) {
-                                  color = colorScheme.error;
-                                }
-                                if (states.isEmpty) {
-                                  color = colorScheme.secondary;
-                                }
-                                return color;
-                              },
-                            ),
-                          ),
-                          decoration: const InputDecoration(
-                            labelText: 'hora',
-                            suffixIcon: Icon(Icons.watch_later_outlined),
-                          ),
-                          builder: (BuildContext context, Widget? child) {
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              child: Directionality(
-                                textDirection: TextDirection.ltr,
-                                child: MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    alwaysUse24HourFormat: true,
-                                  ),
-                                  child: child!,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ReactiveFormConsumer(
-              builder: (BuildContext context, FormGroup form, Widget? child) {
-                return Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: width * .2),
-                  child: ElevatedButton(
-                      onPressed: form.valid
-                          ? () {
-                              context.router.maybePop();
-                              final name = form.value["habitName"].toString();
-                              final hour = form.value["habitHour"] as DateTime;
-                              _addHabit(context, name: name, hour: hour);
-                            }
-                          : null,
-                      child: Text("Save")),
-                );
-              },
-            ),
-            const Gap(12)
-          ],
+              ReactiveFormConsumer(
+                builder: (BuildContext context, FormGroup form, Widget? child) {
+                  return Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: width * .2),
+                    child: ElevatedButton(
+                        onPressed: form.valid
+                            ? () {
+                                //_addHabit(context, name: name, hour: hour);
+                                _addHabit(context, formData: form.value);
+                              }
+                            : null,
+                        child: Text("Save")),
+                  );
+                },
+              ),
+              const Gap(12)
+            ],
+          ),
         ),
       ),
     );
