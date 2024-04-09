@@ -93,41 +93,35 @@ class AppTheme {
   );
 
   static final textTheme = TextTheme(
-      // bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      // bodyLarge: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      // bodySmall: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      // labelMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      //   bodyMedium: TextStyle(
-      //   color: colorScheme.secondary,
-      // ),
-      );
+    bodyMedium: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    bodyLarge: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    bodySmall: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    labelMedium: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    labelSmall: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    labelLarge: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    titleLarge: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    titleMedium: TextStyle(
+      color: colorScheme.secondary,
+    ),
+    titleSmall: TextStyle(
+      color: colorScheme.secondary,
+    ),
+  );
+  static final CardTheme cardTheme = CardTheme(
+    color: colorScheme.surface,
+  );
 }

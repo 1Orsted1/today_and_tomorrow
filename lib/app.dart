@@ -31,12 +31,13 @@ class _AppState extends State<App> {
       ],
       child: MaterialApp.router(
         theme: ThemeData(
-          fontFamily: 'Urbanist',
-          colorScheme: AppTheme.colorScheme,
-          appBarTheme: AppTheme.appBarTheme,
-          elevatedButtonTheme: AppTheme.elevatedButtonStyle,
-          inputDecorationTheme: AppTheme.inputDecorationTheme,
-        ),
+            fontFamily: 'Urbanist',
+            colorScheme: AppTheme.colorScheme,
+            appBarTheme: AppTheme.appBarTheme,
+            elevatedButtonTheme: AppTheme.elevatedButtonStyle,
+            inputDecorationTheme: AppTheme.inputDecorationTheme,
+            cardTheme: AppTheme.cardTheme,
+            textTheme: AppTheme.textTheme),
         locale: TranslationProvider.of(context).flutterLocale, // use provider
         supportedLocales: AppLocaleUtils.supportedLocales,
         localizationsDelegates: const [
