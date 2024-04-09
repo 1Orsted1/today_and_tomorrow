@@ -41,5 +41,6 @@
 		// strings. This setting will prevent that.
 		"editor.wordBasedSuggestions": "off",
 	},
-	"cmake.configureOnOpen": true
+	"cmake.configureOnOpen": true,
+	"cmake.sourceDirectory": "/Users/felipetlaxcala/workspace/mobile_development/flutterApp/today_and_tomorrow/linux"
 }

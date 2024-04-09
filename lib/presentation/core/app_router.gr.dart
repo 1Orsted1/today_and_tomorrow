@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddHabitRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddHabitScreen(),
+      );
+    },
     DashBoardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -40,6 +46,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddHabitScreen]
+class AddHabitRoute extends PageRouteInfo<void> {
+  const AddHabitRoute({List<PageRouteInfo>? children})
+      : super(
+          AddHabitRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddHabitRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

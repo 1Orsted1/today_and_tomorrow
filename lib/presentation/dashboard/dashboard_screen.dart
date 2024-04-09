@@ -17,8 +17,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   PreferredSizeWidget _appBuilder(BuildContext context, TabsRouter tabsRouter) {
     if (tabsRouter.activeIndex == 0) return statisticsAppBar();
-    if (tabsRouter.activeIndex == 1) return homeAppBar();
-    //if (tabsRouter.activeIndex == 2) return goalAppBar();
+    if (tabsRouter.activeIndex == 1) return homeAppBar(context);
     return goalAppBar();
   }
 
