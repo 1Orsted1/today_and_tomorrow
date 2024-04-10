@@ -5,4 +5,5 @@ abstract class IHabitFacade {
   Future<void> storeNewHabit(Map<String, dynamic> newHabit);
   Stream<List<Habit>> getAllHabits();
   Future<bool> deleteHabit({required int id});
+  Habit getHabitById({required int id});
 }

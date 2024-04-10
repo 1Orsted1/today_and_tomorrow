@@ -14,6 +14,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
   HabitBloc(IHabitFacade facade) : super(HabitState.initial()) {
     on<_NewHabit>((event, emit) async {
       try {
+        //todo: handle errors and loading state
         await facade.storeNewHabit(event.formData);
         emit(state.copyWith(habitJustCreated: true));
       } finally {
@@ -25,7 +26,17 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       return emit.forEach(facade.getAllHabits(),
           onData: (habitList) => state.copyWith(habitList: habitList));
     });
+
+    on<_GetHabitById>((event, emit) {
+      //todo: handle errors and loading state
+      emit(state.copyWith(isLoading: true));
+      final editableHabit = facade.getHabitById(id: event.id);
+      emit(state.copyWith(editableHabit: editableHabit));
+      emit(state.copyWith(isLoading: false));
+    });
+
     on<_DeleteHabit>((event, emit) async {
+      //todo: handle errors and loading state
       await facade.deleteHabit(id: event.id);
     });
   }

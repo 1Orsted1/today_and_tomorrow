@@ -32,7 +32,7 @@ class HabitCard extends StatelessWidget {
         underline: const SizedBox.shrink(),
         onChanged: (String? value) {
           if (value == "edit") {
-            context.router.push(const AddHabitRoute());
+            context.router.push(AddHabitRoute(editId: habit.id));
           }
           if (value == "delete") {
             deleteFunction(habit.id);

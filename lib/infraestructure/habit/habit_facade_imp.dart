@@ -28,4 +28,9 @@ class HabitFacadeImp implements IHabitFacade {
   Future<bool> deleteHabit({required int id}) async {
     return dataSource.deleteHabit(id: id);
   }
+
+  @override
+  Habit getHabitById({required int id}) {
+    return dataSource.getHabitById(id: id);
+  }
 }

@@ -31,4 +31,6 @@ class Habit {
     }
     return null;
   }
+
+  Map<String, dynamic> toJson(Habit habit) => _$HabitToJson(this);
 }

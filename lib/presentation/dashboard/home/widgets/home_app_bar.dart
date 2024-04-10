@@ -10,7 +10,7 @@ AppBar homeAppBar(BuildContext context) {
     title: Text(dateToday.toString()),
     actions: [
       IconButton(
-          onPressed: () => context.router.push(const AddHabitRoute()),
+          onPressed: () => context.router.push(AddHabitRoute()),
           icon: const Icon(Icons.add))
     ],
   );

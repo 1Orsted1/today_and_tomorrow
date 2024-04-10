@@ -5,4 +5,5 @@ abstract class IHabitDataSource {
   Future<void> storeNewHabit(Habit newHabit);
   Stream<List<Habit>> getAllHabits();
   Future<bool> deleteHabit({required int id});
+  Habit getHabitById({required int id});
 }
