@@ -21,8 +21,11 @@ class HabitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme;
-    final formatedTime = DateFormat.jm().format(habit.hour);
-
+    final formatedInitialHour = DateFormat.jm().format(habit.hour);
+    String? formatedEndHour;
+    if (habit.endingHour != null) {
+      formatedEndHour = DateFormat.jm().format(habit.endingHour!);
+    }
     Widget dropDowmMenu() {
       return Container(
           child: DropdownButton<String>(
@@ -148,14 +151,14 @@ class HabitCard extends StatelessWidget {
                           const Gap(4),
                           //todo replace with a translations implementation
                           Text(
-                            formatedTime,
+                            formatedInitialHour,
                             style: textStyle.labelMedium,
                           ),
-                          const Text(" - "),
-                          Text(
-                            formatedTime,
-                            style: textStyle.labelMedium,
-                          ),
+                          if (formatedEndHour != null)
+                            Text(
+                              ' - ${formatedEndHour}',
+                              style: textStyle.labelMedium,
+                            ),
                         ],
                       ),
                     ),

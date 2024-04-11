@@ -34,6 +34,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
       {
         "name": FormControl<String>(validators: [Validators.required]),
         "hour": FormControl<DateTime>(validators: [Validators.required]),
+        "endingHour": FormControl<DateTime>(),
       },
     );
   }
@@ -49,7 +50,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
       //todo use a better implementation
       formGroup.value = {
         "name": state.editableHabit!.name,
-        "hour": state.editableHabit!.hour
+        "hour": state.editableHabit!.hour,
+        "endingHour": state.editableHabit?.endingHour,
       };
     }
 
@@ -96,17 +98,16 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
             formGroup: formGroup,
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const Gap(12),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const Gap(12),
+                            SizedBox(
                               child: ReactiveTextField(
                                 //cursorHeight: 20,
                                 formControlName: "name",
@@ -129,79 +130,132 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                 ),
                               ),
                             ),
-                          ),
-                          const Gap(24),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: SizedBox(
-                              child: ReactiveDateTimePicker(
-                                formControlName: 'hour',
-                                type: ReactiveDatePickerFieldType.time,
-                                timePickerEntryMode:
-                                    TimePickerEntryMode.inputOnly,
-                                style: TextStyle(
-                                  color: MaterialStateColor.resolveWith(
-                                    (Set<MaterialState> states) {
-                                      Color color = colorScheme.primary;
-                                      if (states
-                                          .contains(MaterialState.error)) {
-                                        color = colorScheme.error;
-                                      }
-                                      if (states.isEmpty) {
-                                        color = colorScheme.secondary;
-                                      }
-                                      return color;
+                            const Gap(24),
+                            Row(
+                              children: [
+                                Flexible(
+                                  //width: MediaQuery.of(context).size.width / 2.5,
+                                  child: ReactiveDateTimePicker(
+                                    formControlName: 'hour',
+                                    type: ReactiveDatePickerFieldType.time,
+                                    timePickerEntryMode:
+                                        TimePickerEntryMode.inputOnly,
+                                    style: TextStyle(
+                                      color: MaterialStateColor.resolveWith(
+                                        (Set<MaterialState> states) {
+                                          Color color = colorScheme.primary;
+                                          if (states
+                                              .contains(MaterialState.error)) {
+                                            color = colorScheme.error;
+                                          }
+                                          if (states.isEmpty) {
+                                            color = colorScheme.secondary;
+                                          }
+                                          return color;
+                                        },
+                                      ),
+                                    ),
+                                    decoration: const InputDecoration(
+                                      labelText: 'inicia',
+                                      suffixIcon:
+                                          Icon(Icons.watch_later_outlined),
+                                    ),
+                                    builder:
+                                        (BuildContext context, Widget? child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: Directionality(
+                                          textDirection: TextDirection.ltr,
+                                          child: MediaQuery(
+                                            data:
+                                                MediaQuery.of(context).copyWith(
+                                              alwaysUse24HourFormat: true,
+                                            ),
+                                            child: child!,
+                                          ),
+                                        ),
+                                      );
                                     },
                                   ),
                                 ),
-                                decoration: const InputDecoration(
-                                  labelText: 'hora',
-                                  suffixIcon: Icon(Icons.watch_later_outlined),
-                                ),
-                                builder: (BuildContext context, Widget? child) {
-                                  return Theme(
-                                    data: Theme.of(context).copyWith(
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: Directionality(
-                                      textDirection: TextDirection.ltr,
-                                      child: MediaQuery(
-                                        data: MediaQuery.of(context).copyWith(
-                                          alwaysUse24HourFormat: true,
-                                        ),
-                                        child: child!,
+                                const Gap(8),
+                                Flexible(
+                                  //width: MediaQuery.of(context).size.width / 2.5,
+                                  child: ReactiveDateTimePicker(
+                                    formControlName: 'endingHour',
+                                    type: ReactiveDatePickerFieldType.time,
+                                    timePickerEntryMode:
+                                        TimePickerEntryMode.inputOnly,
+                                    style: TextStyle(
+                                      color: MaterialStateColor.resolveWith(
+                                        (Set<MaterialState> states) {
+                                          Color color = colorScheme.primary;
+                                          if (states
+                                              .contains(MaterialState.error)) {
+                                            color = colorScheme.error;
+                                          }
+                                          if (states.isEmpty) {
+                                            color = colorScheme.secondary;
+                                          }
+                                          return color;
+                                        },
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                    decoration: const InputDecoration(
+                                      labelText: 'termina',
+                                      suffixIcon:
+                                          Icon(Icons.watch_later_outlined),
+                                    ),
+                                    builder:
+                                        (BuildContext context, Widget? child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                        ),
+                                        child: Directionality(
+                                          textDirection: TextDirection.ltr,
+                                          child: MediaQuery(
+                                            data:
+                                                MediaQuery.of(context).copyWith(
+                                              alwaysUse24HourFormat: true,
+                                            ),
+                                            child: child!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  ReactiveFormConsumer(
-                    builder:
-                        (BuildContext context, FormGroup form, Widget? child) {
-                      return Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(horizontal: width * .2),
-                        child: ElevatedButton(
-                            onPressed: form.valid
-                                ? () {
-                                    //_addHabit(context, name: name, hour: hour);
-                                    addHabit(context, formData: form.value);
-                                  }
-                                : null,
-                            child: Text("Save")),
-                      );
-                    },
-                  ),
-                  const Gap(12)
-                ],
+                    ReactiveFormConsumer(
+                      builder: (BuildContext context, FormGroup form,
+                          Widget? child) {
+                        return Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(horizontal: width * .2),
+                          child: ElevatedButton(
+                              onPressed: form.valid && form.dirty
+                                  ? () {
+                                      //_addHabit(context, name: name, hour: hour);
+                                      addHabit(context, formData: form.value);
+                                    }
+                                  : null,
+                              child: Text("Save")),
+                        );
+                      },
+                    ),
+                    const Gap(12)
+                  ],
+                ),
               ),
             ),
           ),

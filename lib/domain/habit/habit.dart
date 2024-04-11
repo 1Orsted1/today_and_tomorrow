@@ -15,14 +15,18 @@ class Habit {
   @Property(type: PropertyType.date)
   @JsonKey(readValue: readValue)
   DateTime hour;
+  @Property(type: PropertyType.date)
+  @JsonKey(readValue: readValue)
+  DateTime? endingHour;
 
-  Habit(this.name, this.hour, {this.id = 0});
+  Habit(this.name, this.hour, {this.id = 0, this.endingHour});
 
   factory Habit.fromJson(Map<String, dynamic> json) => _$HabitFromJson(json);
 
   static String? readValue(Map<dynamic, dynamic> json, String key) {
     if (json.containsKey(key)) {
       try {
+        if (json[key] == null) return null;
         return json[key].toString();
       } on FormatException catch (e) {
         debugPrint("Error parsing hour: $e");
