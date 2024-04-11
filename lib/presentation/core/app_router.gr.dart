@@ -16,9 +16,14 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     AddHabitRoute.name: (routeData) {
+      final args = routeData.argsAs<AddHabitRouteArgs>(
+          orElse: () => const AddHabitRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddHabitScreen(),
+        child: AddHabitScreen(
+          key: args.key,
+          editId: args.editId,
+        ),
       );
     },
     DashBoardRoute.name: (routeData) {
@@ -50,16 +55,40 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [AddHabitScreen]
-class AddHabitRoute extends PageRouteInfo<void> {
-  const AddHabitRoute({List<PageRouteInfo>? children})
-      : super(
+class AddHabitRoute extends PageRouteInfo<AddHabitRouteArgs> {
+  AddHabitRoute({
+    Key? key,
+    int? editId,
+    List<PageRouteInfo>? children,
+  }) : super(
           AddHabitRoute.name,
+          args: AddHabitRouteArgs(
+            key: key,
+            editId: editId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AddHabitRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AddHabitRouteArgs> page =
+      PageInfo<AddHabitRouteArgs>(name);
+}
+
+class AddHabitRouteArgs {
+  const AddHabitRouteArgs({
+    this.key,
+    this.editId,
+  });
+
+  final Key? key;
+
+  final int? editId;
+
+  @override
+  String toString() {
+    return 'AddHabitRouteArgs{key: $key, editId: $editId}';
+  }
 }
 
 /// generated route for

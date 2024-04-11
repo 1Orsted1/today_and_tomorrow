@@ -4,11 +4,14 @@ part of 'habit_bloc.dart';
 class HabitState with _$HabitState {
   const factory HabitState({
     required List<Habit> habitList,
-    required bool habitJustCreated,
+    required bool operationCompleted,
+    required bool isLoading,
+    Habit? editableHabit,
   }) = _HabitState;
 
   factory HabitState.initial() => const HabitState(
         habitList: [],
-        habitJustCreated: false,
+        operationCompleted: false,
+        isLoading: false,
       );
 }
