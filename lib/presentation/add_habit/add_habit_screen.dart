@@ -45,9 +45,20 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     final habitBloc = context.watch<HabitBloc>();
     final habitState = habitBloc.state;
 
+    void formPopulateFrom(HabitState state) {
+      //todo use a better implementation
+      formGroup.value = {
+        "name": state.editableHabit!.name,
+        "hour": state.editableHabit!.hour
+      };
+    }
+
     void addHabit(BuildContext context,
         {required Map<String, dynamic> formData}) {
-      habitBloc.add(HabitEvent.newHabit(formData: formData));
+      habitBloc.add(HabitEvent.saveHabit(
+        formData: formData,
+        id: widget.editId,
+      ));
     }
 
     return Scaffold(
@@ -61,12 +72,23 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
           icon: const Icon(Icons.close),
         ),
       ),
-      body: BlocListener<HabitBloc, HabitState>(
-        listenWhen: (prev, current) =>
-            !prev.habitJustCreated && current.habitJustCreated,
-        listener: (context, state) {
-          context.router.maybePop();
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<HabitBloc, HabitState>(
+            listenWhen: (prev, current) =>
+                !prev.operationCompleted && current.operationCompleted,
+            listener: (context, state) {
+              context.router.maybePop();
+            },
+          ),
+          BlocListener<HabitBloc, HabitState>(
+            listenWhen: (prev, current) =>
+                prev.editableHabit == null && current.editableHabit != null,
+            listener: (context, state) {
+              formPopulateFrom(state);
+            },
+          ),
+        ],
         child: LoadingOverlay(
           isLoading: habitState.isLoading,
           progressIndicator: const CircularProgressIndicator.adaptive(),

@@ -32,5 +32,7 @@ class Habit {
     return null;
   }
 
-  Map<String, dynamic> toJson(Habit habit) => _$HabitToJson(this);
+  Map<String, dynamic> toJson() => _$HabitToJson(this);
+
+  void updateId({required int newId}) => id = newId;
 }

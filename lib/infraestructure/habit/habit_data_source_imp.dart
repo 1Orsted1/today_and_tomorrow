@@ -18,8 +18,9 @@ class HabitDataSourceImp implements IHabitDataSource {
   }
 
   @override
-  Future<void> storeNewHabit(Habit newHabit) async {
-    _habitBox.putAsync(newHabit);
+  Future<bool> saveHabit(Habit newHabit) async {
+    await _habitBox.putAsync(newHabit);
+    return true;
   }
 
   @override
@@ -42,5 +43,11 @@ class HabitDataSourceImp implements IHabitDataSource {
   @override
   Habit getHabitById({required int id}) {
     return _habitBox.get(id)!;
+  }
+
+  @override
+  Future<bool> updateHabit({required Habit habit}) async {
+    await _habitBox.putAsync(habit);
+    return true;
   }
 }

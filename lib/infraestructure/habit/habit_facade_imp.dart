@@ -14,9 +14,13 @@ class HabitFacadeImp implements IHabitFacade {
   }
 
   @override
-  Future<void> storeNewHabit(Map<String, dynamic> newHabit) async {
-    final habitFromJson = Habit.fromJson(newHabit);
-    dataSource.storeNewHabit(habitFromJson);
+  Future<bool> saveHabit({
+    required Map<String, dynamic> newHabit,
+    int? editId,
+  }) async {
+    var habitFromJson = Habit.fromJson(newHabit);
+    if (editId != null) habitFromJson.updateId(newId: editId);
+    return await dataSource.saveHabit(habitFromJson);
   }
 
   @override
