@@ -163,10 +163,12 @@ class HabitCard extends StatelessWidget {
                       ),
                     ),
                     //?week Widget
-                    const StaggeredGridTile.count(
+                    StaggeredGridTile.count(
                       crossAxisCellCount: 17,
                       mainAxisCellCount: 7,
-                      child: WeekWidget(),
+                      child: WeekWidget(
+                        habit: habit,
+                      ),
                     ),
                     //?white space
                     const StaggeredGridTile.count(

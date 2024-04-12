@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 14 (7 per locale)
+/// Strings: 28 (14 per locale)
 ///
-/// Built on 2024-04-10 at 02:02 UTC
+/// Built on 2024-04-12 at 04:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -152,6 +152,15 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get save => 'Save';
 	late final _StringsLoginEn login = _StringsLoginEn._(_root);
 	late final _StringsBottomBarTitlesEn bottomBarTitles = _StringsBottomBarTitlesEn._(_root);
+	List<String> get weekLetters => [
+		'M',
+		'T',
+		'W',
+		'T',
+		'F',
+		'Sat',
+		'Su',
+	];
 }
 
 // Path: login
@@ -205,6 +214,15 @@ class _StringsEs implements Translations {
 	@override String get save => 'guardar';
 	@override late final _StringsLoginEs login = _StringsLoginEs._(_root);
 	@override late final _StringsBottomBarTitlesEs bottomBarTitles = _StringsBottomBarTitlesEs._(_root);
+	@override List<String> get weekLetters => [
+		'L',
+		'M',
+		'M',
+		'J',
+		'V',
+		'S',
+		'D',
+	];
 }
 
 // Path: login
@@ -243,6 +261,13 @@ extension on Translations {
 			case 'bottomBarTitles.statistics': return 'Statistics';
 			case 'bottomBarTitles.home': return 'Home';
 			case 'bottomBarTitles.goals': return 'Goals';
+			case 'weekLetters.0': return 'M';
+			case 'weekLetters.1': return 'T';
+			case 'weekLetters.2': return 'W';
+			case 'weekLetters.3': return 'T';
+			case 'weekLetters.4': return 'F';
+			case 'weekLetters.5': return 'Sat';
+			case 'weekLetters.6': return 'Su';
 			default: return null;
 		}
 	}
@@ -258,6 +283,13 @@ extension on _StringsEs {
 			case 'bottomBarTitles.statistics': return 'Estadisticas';
 			case 'bottomBarTitles.home': return 'Principal';
 			case 'bottomBarTitles.goals': return 'Metas';
+			case 'weekLetters.0': return 'L';
+			case 'weekLetters.1': return 'M';
+			case 'weekLetters.2': return 'M';
+			case 'weekLetters.3': return 'J';
+			case 'weekLetters.4': return 'V';
+			case 'weekLetters.5': return 'S';
+			case 'weekLetters.6': return 'D';
 			default: return null;
 		}
 	}

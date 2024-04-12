@@ -9,5 +9,14 @@
     "statistics":"Statistics",
     "home": "Home",
     "goals":"Goals"
-  }
+  },
+  "weekLetters":[
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "Sat",
+    "Su"
+  ]
 }

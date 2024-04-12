@@ -12,7 +12,7 @@ Future<void> main() async {
   runApp(
     TranslationProvider(
       child: DevicePreview(
-        enabled: !kReleaseMode,
+        enabled: false, //!kReleaseMode,
         builder: (BuildContext context) => const App(),
       ),
     ),

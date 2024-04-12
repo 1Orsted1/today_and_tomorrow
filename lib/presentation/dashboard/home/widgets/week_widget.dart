@@ -1,83 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:today_and_tomorrow/domain/habit/habit.dart';
+import 'package:today_and_tomorrow/i18n/strings.g.dart';
 
-class WeekWidget extends StatefulWidget {
-  const WeekWidget({super.key});
+class WeekWidget extends StatelessWidget {
+  const WeekWidget({super.key, required this.habit});
+  final Habit habit;
 
-  @override
-  State<WeekWidget> createState() => _WeekWidgetState();
-}
-
-class _WeekWidgetState extends State<WeekWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'L', dayI: 1, dayStatus: true),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'M', dayI: 2, dayStatus: true),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'M', dayI: 3, dayStatus: false),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'J', dayI: 4, dayStatus: true),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'V', dayI: 5, dayStatus: null),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'S', dayI: 6, dayStatus: null),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: dayWidget(dayS: 'D', dayI: 7, dayStatus: null),
-          ),
-        ],
-      ),
-    );
-  }
+    final weekDays = habit.getDaysCompleted();
+    final t = Translations.of(context);
 
-  List<Widget> dayWidget(
-      {required String dayS, required int dayI, required bool? dayStatus}) {
-    return [
-      Text(dayS),
-      if (dayStatus == null)
-        CircleAvatar(
-          backgroundColor: Colors.grey,
-          radius: 8,
-        ),
-      if (dayStatus == true) //number of the monday
-        CircleAvatar(
-          backgroundColor: Theme.of(context).primaryColor,
-          child: Center(
-            child: Icon(
-              Icons.check_rounded,
-              color: Colors.white,
-              size: 15,
+    List<Widget> dayWidget({
+      required String dayS,
+      required int dayI,
+      required HabitStatus dayStatus,
+    }) {
+      final colorScheme = Theme.of(context).colorScheme;
+      return [
+        Text(dayS),
+        if (dayStatus == HabitStatus.incoming)
+          const CircleAvatar(
+            backgroundColor: Colors.grey,
+            radius: 8,
+          ),
+        if (dayStatus == HabitStatus.beforeCreated)
+          CircleAvatar(
+            backgroundColor: colorScheme.background,
+            radius: 8,
+          ),
+        if (dayStatus == HabitStatus.completed) //number of the monday
+          CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            radius: 8,
+            child: const Center(
+              child: Icon(
+                Icons.check_rounded,
+                color: Colors.white,
+                size: 15,
+              ),
             ),
           ),
-          radius: 8,
-        ),
-      if (dayStatus == false)
-        CircleAvatar(
-          radius: 8,
-          child: Center(
-              child: Icon(
-            Icons.cancel,
-            size: 16,
-          )),
-        ),
-      Text(dayI.toString()),
-    ];
+        if (dayStatus == HabitStatus.completedToday)
+          CircleAvatar(
+            backgroundColor: colorScheme.secondary,
+            radius: 9,
+            child: CircleAvatar(
+              radius: 8,
+              backgroundColor: colorScheme.primary,
+              child: const Center(
+                child: Icon(
+                  Icons.check_rounded,
+                  color: Colors.white,
+                  size: 15,
+                ),
+              ),
+            ),
+          ),
+        if (dayStatus == HabitStatus.notCompleted)
+          CircleAvatar(
+            radius: 9,
+            backgroundColor: colorScheme.secondary,
+            child: const CircleAvatar(
+              radius: 8,
+              child: Center(
+                child: Icon(
+                  Icons.cancel,
+                  size: 16,
+                ),
+              ),
+            ),
+          ),
+        if (dayStatus == HabitStatus.notCompletedToday)
+          CircleAvatar(
+            radius: 9,
+            child: CircleAvatar(
+              radius: 8,
+              backgroundColor: colorScheme.secondary,
+              child: const Center(
+                child: Icon(
+                  Icons.cancel,
+                  size: 16,
+                ),
+              ),
+            ),
+          ),
+        Text(dayI.toString()),
+      ];
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        for (var i = 0; i < weekDays.length; i++)
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: dayWidget(
+              dayS: t.weekLetters[i],
+              dayI: weekDays[i].$1,
+              dayStatus: weekDays[i].$2,
+            ),
+          ),
+      ],
+    );
   }
 }

@@ -9,6 +9,17 @@
       "statistics":"Estadisticas",
       "home": "Principal",
       "goals":"Metas"
-    }
+    },
+    "weekLetters":[
+      "L",
+      "M",
+      "M",
+      "J",
+      "V",
+      "S",
+      "D"
+    ]
+
+    
   }
   

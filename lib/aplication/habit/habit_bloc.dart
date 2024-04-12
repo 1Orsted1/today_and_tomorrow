@@ -12,7 +12,7 @@ part 'habit_bloc.freezed.dart';
 @Injectable()
 class HabitBloc extends Bloc<HabitEvent, HabitState> {
   HabitBloc(IHabitFacade facade) : super(HabitState.initial()) {
-    on<_NewHabit>((event, emit) async {
+    on<_SaveHabit>((event, emit) async {
       try {
         emit(state.copyWith(isLoading: true, operationCompleted: false));
         //todo: handle errors and loading state

@@ -23,7 +23,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 5908401262347548688),
       name: 'Habit',
-      lastPropertyId: const obx_int.IdUid(4, 4839355672167403760),
+      lastPropertyId: const obx_int.IdUid(5, 5106971006442488531),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -44,6 +44,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(4, 4839355672167403760),
             name: 'endingHour',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 5106971006442488531),
+            name: 'creationDate',
             type: 10,
             flags: 0)
       ],
@@ -109,11 +114,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Habit object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addInt64(2, object.hour.millisecondsSinceEpoch);
           fbb.addInt64(3, object.endingHour?.millisecondsSinceEpoch);
+          fbb.addInt64(4, object.creationDate?.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -122,6 +128,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final endingHourValue =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
+          final creationDateValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
           final nameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final hourParam = DateTime.fromMillisecondsSinceEpoch(
@@ -132,7 +140,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
               ? null
               : DateTime.fromMillisecondsSinceEpoch(endingHourValue);
           final object = Habit(nameParam, hourParam,
-              id: idParam, endingHour: endingHourParam);
+              id: idParam, endingHour: endingHourParam)
+            ..creationDate = creationDateValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(creationDateValue);
 
           return object;
         })
@@ -156,4 +167,8 @@ class Habit_ {
   /// see [Habit.endingHour]
   static final endingHour =
       obx.QueryDateProperty<Habit>(_entities[0].properties[3]);
+
+  /// see [Habit.creationDate]
+  static final creationDate =
+      obx.QueryDateProperty<Habit>(_entities[0].properties[4]);
 }

@@ -19,7 +19,11 @@ class HabitFacadeImp implements IHabitFacade {
     int? editId,
   }) async {
     var habitFromJson = Habit.fromJson(newHabit);
-    if (editId != null) habitFromJson.updateId(newId: editId);
+    if (editId != null) {
+      habitFromJson.updateId(newId: editId);
+    } else {
+      habitFromJson.setCreationDate();
+    }
     return await dataSource.saveHabit(habitFromJson);
   }
 

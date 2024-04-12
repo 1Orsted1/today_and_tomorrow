@@ -5,7 +5,7 @@ class HabitEvent with _$HabitEvent {
   const factory HabitEvent.saveHabit({
     required Map<String, dynamic> formData,
     int? id,
-  }) = _NewHabit;
+  }) = _SaveHabit;
 
   const factory HabitEvent.getAll() = _GetAllHabits;
 
