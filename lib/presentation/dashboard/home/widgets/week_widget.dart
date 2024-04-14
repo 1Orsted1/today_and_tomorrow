@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:today_and_tomorrow/domain/habit/day_status.dart';
 import 'package:today_and_tomorrow/domain/habit/habit.dart';
 import 'package:today_and_tomorrow/i18n/strings.g.dart';
 
@@ -14,22 +15,22 @@ class WeekWidget extends StatelessWidget {
     List<Widget> dayWidget({
       required String dayS,
       required int dayI,
-      required HabitStatus dayStatus,
+      required DayStatus dayStatus,
     }) {
       final colorScheme = Theme.of(context).colorScheme;
       return [
         Text(dayS),
-        if (dayStatus == HabitStatus.incoming)
+        if (dayStatus == DayStatus.incoming)
           const CircleAvatar(
             backgroundColor: Colors.grey,
             radius: 8,
           ),
-        if (dayStatus == HabitStatus.beforeCreated)
+        if (dayStatus == DayStatus.beforeCreated)
           CircleAvatar(
             backgroundColor: colorScheme.background,
             radius: 8,
           ),
-        if (dayStatus == HabitStatus.completed) //number of the monday
+        if (dayStatus == DayStatus.completed) //number of the monday
           CircleAvatar(
             backgroundColor: Theme.of(context).primaryColor,
             radius: 8,
@@ -41,7 +42,7 @@ class WeekWidget extends StatelessWidget {
               ),
             ),
           ),
-        if (dayStatus == HabitStatus.completedToday)
+        if (dayStatus == DayStatus.completedToday)
           CircleAvatar(
             backgroundColor: colorScheme.secondary,
             radius: 9,
@@ -57,7 +58,7 @@ class WeekWidget extends StatelessWidget {
               ),
             ),
           ),
-        if (dayStatus == HabitStatus.notCompleted)
+        if (dayStatus == DayStatus.notCompleted)
           CircleAvatar(
             radius: 9,
             backgroundColor: colorScheme.secondary,
@@ -71,7 +72,7 @@ class WeekWidget extends StatelessWidget {
               ),
             ),
           ),
-        if (dayStatus == HabitStatus.notCompletedToday)
+        if (dayStatus == DayStatus.notCompletedToday)
           CircleAvatar(
             radius: 9,
             child: CircleAvatar(

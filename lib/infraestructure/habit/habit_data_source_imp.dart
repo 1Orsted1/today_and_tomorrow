@@ -44,10 +44,4 @@ class HabitDataSourceImp implements IHabitDataSource {
   Habit getHabitById({required int id}) {
     return _habitBox.get(id)!;
   }
-
-  @override
-  Future<bool> updateHabit({required Habit habit}) async {
-    await _habitBox.putAsync(habit);
-    return true;
-  }
 }

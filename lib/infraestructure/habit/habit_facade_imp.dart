@@ -41,4 +41,9 @@ class HabitFacadeImp implements IHabitFacade {
   Habit getHabitById({required int id}) {
     return dataSource.getHabitById(id: id);
   }
+
+  @override
+  Future<bool> updateHabit({required Habit habit}) {
+    return dataSource.saveHabit(habit);
+  }
 }
