@@ -55,7 +55,11 @@ class Habit {
 
   Map<String, dynamic> toJson() => _$HabitToJson(this);
 
-  void updateId({required int newId}) => id = newId;
+  void updateData({required Habit oldData}) {
+    id = oldData.id;
+    creationDate = oldData.creationDate;
+    completedDays = oldData.completedDays;
+  }
 
   void setCreationDate() => creationDate = DateTime.now();
 
@@ -66,12 +70,13 @@ class Habit {
   bool canCompleteChallenge(DateTime date) {
     //si la hora que tiene destinada para completarse ese esta hora
     //si la tarea no se ha completado\
-    final isTime = hour.hour == date.hour;
+    final isTime = (hour.hour == date.hour && hour.minute == date.minute);
     //never completed a challenge before, can edit
     if (isTime) {
       if (completedDays.isEmpty) return true;
+      final lastCompleted = _convertFromIso(completedDays.last);
       //if the last day the challenge was completed wanst today, can edit
-      if (_convertFromIso(completedDays.last).day != date.day) return true;
+      if (lastCompleted.day != date.day) return true;
     }
     return false;
   }

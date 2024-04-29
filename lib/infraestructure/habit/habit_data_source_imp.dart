@@ -19,11 +19,7 @@ class HabitDataSourceImp implements IHabitDataSource {
 
   @override
   Future<bool> saveHabit(Habit newHabit) async {
-    final x = await _habitBox.getAllAsync();
-    print("before ${x.firstOrNull?.completedDays}");
-    final i = await _habitBox.putAsync(newHabit);
-    final y = await _habitBox.getAllAsync();
-    print("$i after ${y.firstOrNull?.completedDays}");
+    await _habitBox.putAsync(newHabit);
     return true;
   }
 
