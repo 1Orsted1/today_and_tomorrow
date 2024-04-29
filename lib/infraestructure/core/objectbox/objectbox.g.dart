@@ -23,7 +23,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 5908401262347548688),
       name: 'Habit',
-      lastPropertyId: const obx_int.IdUid(5, 5106971006442488531),
+      lastPropertyId: const obx_int.IdUid(6, 5606328496598617119),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -50,6 +50,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(5, 5106971006442488531),
             name: 'creationDate',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 5606328496598617119),
+            name: 'completedDays',
+            type: 30,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -114,12 +119,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (Habit object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(6);
+          final completedDaysOffset = fbb.writeList(object.completedDays
+              .map(fbb.writeString)
+              .toList(growable: false));
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addInt64(2, object.hour.millisecondsSinceEpoch);
           fbb.addInt64(3, object.endingHour?.millisecondsSinceEpoch);
           fbb.addInt64(4, object.creationDate?.millisecondsSinceEpoch);
+          fbb.addOffset(5, completedDaysOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -143,7 +152,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
               id: idParam, endingHour: endingHourParam)
             ..creationDate = creationDateValue == null
                 ? null
-                : DateTime.fromMillisecondsSinceEpoch(creationDateValue);
+                : DateTime.fromMillisecondsSinceEpoch(creationDateValue)
+            ..completedDays = const fb.ListReader<String>(
+                    fb.StringReader(asciiOptimization: true),
+                    lazy: false)
+                .vTableGet(buffer, rootOffset, 14, []);
 
           return object;
         })
@@ -171,4 +184,8 @@ class Habit_ {
   /// see [Habit.creationDate]
   static final creationDate =
       obx.QueryDateProperty<Habit>(_entities[0].properties[4]);
+
+  /// see [Habit.completedDays]
+  static final completedDays =
+      obx.QueryStringVectorProperty<Habit>(_entities[0].properties[5]);
 }

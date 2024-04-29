@@ -5,7 +5,7 @@ class CompleteHabitToday extends StatelessWidget {
   const CompleteHabitToday(
       {super.key, required this.habit, required this.completeFunction});
   final Habit habit;
-  final Function() completeFunction;
+  final Function(Habit habit) completeFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CompleteHabitToday extends StatelessWidget {
           ),
         ),
         onDismissed: (direction) {
-          completeFunction();
+          completeFunction(habit);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               behavior: SnackBarBehavior.floating,
               margin: const EdgeInsets.only(bottom: 0, right: 70, left: 70),

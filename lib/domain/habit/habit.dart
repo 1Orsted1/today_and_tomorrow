@@ -13,18 +13,23 @@ class Habit {
   // or an int property with any name annotated with @Id().
   @Id()
   int id;
+
   String name;
+
   @Property(type: PropertyType.date)
   @JsonKey(readValue: readValue)
   DateTime hour;
+
   @Property(type: PropertyType.date)
   @JsonKey(readValue: readValue)
   DateTime? endingHour;
+
   @Property(type: PropertyType.date)
   @JsonKey(readValue: readValue)
   DateTime? creationDate;
+
   @JsonKey(defaultValue: [])
-  List<DateTime> completedDays = [];
+  List<String> completedDays = [];
 
   Habit(
     this.name,
@@ -42,7 +47,7 @@ class Habit {
         return json[key].toString();
       } on FormatException catch (e) {
         debugPrint("Error parsing hour: $e");
-        return null; // Or throw a specific exception based on your needs
+        return null;
       }
     }
     return null;
@@ -55,16 +60,19 @@ class Habit {
   void setCreationDate() => creationDate = DateTime.now();
 
   void completeActivityToday() {
-    completedDays.add(DateTime.now());
+    completedDays.add(DateTime.now().toIso8601String());
   }
 
-  bool compareDates(DateTime date) {
-    if (completedDays.isEmpty) return false;
-    return completedDays.last.day == date.day;
-  }
-
-  bool compareTimes(DateTime time) {
-    if (hour.hour == time.hour) return true;
+  bool canCompleteChallenge(DateTime date) {
+    //si la hora que tiene destinada para completarse ese esta hora
+    //si la tarea no se ha completado\
+    final isTime = hour.hour == date.hour;
+    //never completed a challenge before, can edit
+    if (isTime) {
+      if (completedDays.isEmpty) return true;
+      //if the last day the challenge was completed wanst today, can edit
+      if (_convertFromIso(completedDays.last).day != date.day) return true;
+    }
     return false;
   }
 
@@ -78,13 +86,14 @@ class Habit {
     ///
     final week = _getDaysOfWeekFrom(today);
     for (int i = 0; i < completedDays.length; i++) {
-      if (completedDays[i].weekOfYear == today.weekOfYear) {
+      final completeDate = _convertFromIso(completedDays[i]);
+      if (completeDate.weekOfYear == today.weekOfYear) {
         final editIndex =
-            week.indexWhere((element) => completedDays[i].day == element.$1);
+            week.indexWhere((element) => completeDate.day == element.$1);
         week[editIndex] = (
-          completedDays[i].day,
+          completeDate.day,
           _evaluateCompleted(
-            evaluatedDay: completedDays[i],
+            evaluatedDay: completeDate,
             today: today,
           )
         );
@@ -98,11 +107,11 @@ class Habit {
     final firstDayOfTheWeek = _findFirstDateOfTheWeek(today);
     final lastDayOfTheWeek = _findLastDateOfTheWeek(today);
     DateTime helperDay = firstDayOfTheWeek;
-    while (helperDay.day <= lastDayOfTheWeek.day) {
+    while (helperDay.isBefore(lastDayOfTheWeek)) {
       weekDays.add(
         (
           helperDay.day,
-          _evaluateInCompleted(
+          _evaluateIncomplet(
             evaluatedDay: helperDay,
             today: today,
           )
@@ -113,7 +122,7 @@ class Habit {
     return weekDays;
   }
 
-  DayStatus _evaluateInCompleted({
+  DayStatus _evaluateIncomplet({
     required DateTime evaluatedDay,
     required DateTime today,
   }) {
@@ -142,5 +151,9 @@ class Habit {
   DateTime _findLastDateOfTheWeek(DateTime dateTime) {
     return dateTime
         .add(Duration(days: DateTime.daysPerWeek - dateTime.weekday));
+  }
+
+  DateTime _convertFromIso(String iso) {
+    return DateTime.parse(iso);
   }
 }

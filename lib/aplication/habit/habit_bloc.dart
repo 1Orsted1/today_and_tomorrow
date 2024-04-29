@@ -43,9 +43,9 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
 
     on<_UpdateHabit>((event, emit) async {
       //todo: handle errors and loading state
-      emit(state.copyWith(isLoading: true));
-      await facade.updateHabit(habit: event.updatedHabit);
-      emit(state.copyWith(isLoading: false));
+      final updatedHabit = event.updatedHabit;
+      updatedHabit.completeActivityToday();
+      await facade.updateHabit(habit: updatedHabit);
     });
   }
 }

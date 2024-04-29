@@ -27,39 +27,35 @@ class _HomeScreenState extends State<HomeScreen> {
     habitBloc = context.watch<HabitBloc>();
 
     return Scaffold(
-      body: LoadingOverlay(
-        isLoading: habitBloc.state.isLoading,
-        progressIndicator: const CircularProgressIndicator.adaptive(),
-        child: SizedBox(
-          height: double.infinity,
-          child: StreamBuilder<List<Habit>>(
-              stream: habitBloc.stream.map((event) => event.habitList),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  debugPrintStack(stackTrace: snapshot.stackTrace);
-                  return Column(
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 60,
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 16, left: 16, right: 16),
-                        child: Text('Error: ${snapshot.error}'),
-                      ),
-                    ],
-                  );
-                } else {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      itemCount: snapshot.hasData ? snapshot.data!.length : 0,
-                      itemBuilder: _itemBuilder(snapshot.data ?? []));
-                }
-              }),
-        ),
+      body: SizedBox(
+        height: double.infinity,
+        child: StreamBuilder<List<Habit>>(
+            stream: habitBloc.stream.map((event) => event.habitList),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                debugPrintStack(stackTrace: snapshot.stackTrace);
+                return Column(
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 60,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 16, left: 16, right: 16),
+                      child: Text('Error: ${snapshot.error}'),
+                    ),
+                  ],
+                );
+              } else {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    itemCount: snapshot.hasData ? snapshot.data!.length : 0,
+                    itemBuilder: _itemBuilder(snapshot.data ?? []));
+              }
+            }),
       ),
     );
   }
