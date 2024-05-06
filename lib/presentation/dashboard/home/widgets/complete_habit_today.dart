@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:loading_overlay/loading_overlay.dart';
+import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
 import 'package:today_and_tomorrow/domain/habit/habit.dart';
 
 class CompleteHabitToday extends StatelessWidget {
@@ -10,53 +15,57 @@ class CompleteHabitToday extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    return Card(
-      color: colorScheme.secondary,
-      child: Dismissible(
-        movementDuration: const Duration(seconds: 2),
-        resizeDuration: const Duration(seconds: 1),
-        background: Container(
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: colorScheme.primary,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(8),
+    final textStyle = theme.textTheme;
+    final bloc = context.watch<HabitBloc>();
+    final formatedInitialHour = DateFormat.jm().format(habit.hour);
+    String? formatedEndHour;
+    if (habit.endingHour != null) {
+      formatedEndHour = DateFormat.jm().format(habit.endingHour!);
+    }
+    return LoadingOverlay(
+      isLoading: bloc.state.waitingToComplete.contains(habit.id),
+      progressIndicator: const CircularProgressIndicator.adaptive(),
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Gap(6),
+            Text(
+              habit.name,
+              style: textStyle.titleMedium,
             ),
-          ),
-          child: Center(
-            child: Text(
-              "Completed!",
-              style: theme.textTheme.displaySmall?.copyWith(
-                color: colorScheme.background,
+            const Gap(6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.alarm,
+                  color: theme.colorScheme.secondary,
+                  size: 16,
+                ),
+                const Gap(4),
+                Text(
+                  formatedInitialHour,
+                  style: textStyle.labelMedium,
+                ),
+                if (formatedEndHour != null)
+                  Text(
+                    ' - $formatedEndHour',
+                    style: textStyle.labelMedium,
+                  ),
+              ],
+            ),
+            const Gap(6),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  completeFunction(habit);
+                },
+                child: Text("Completar hoy"),
               ),
             ),
-          ),
-        ),
-        onDismissed: (direction) {
-          completeFunction(habit);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              behavior: SnackBarBehavior.floating,
-              margin: const EdgeInsets.only(bottom: 0, right: 70, left: 70),
-              padding: const EdgeInsets.all(5),
-              duration: const Duration(milliseconds: 1200),
-              content: Container(
-                  alignment: Alignment.center,
-                  height: 25,
-                  child: Text('Habit ${habit.name} completed today'))));
-        },
-        key: UniqueKey(),
-        direction: DismissDirection.startToEnd,
-        child: Container(
-          height: 100,
-          child: Center(
-            child: Text(
-              "Complete =>",
-              style: theme.textTheme.displaySmall?.copyWith(
-                color: colorScheme.background,
-              ), //TextStyle(color: colorScheme.background),
-            ),
-          ),
+            const Gap(6),
+          ],
         ),
       ),
     );

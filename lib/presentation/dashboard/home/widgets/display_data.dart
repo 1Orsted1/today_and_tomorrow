@@ -30,7 +30,7 @@ class DisplayData extends StatelessWidget {
         underline: const SizedBox.shrink(),
         onChanged: (String? value) {
           if (value == "edit") {
-            context.router.push(AddHabitRoute(editId: habit.id));
+            context.router.push(AddHabitRoute(editHabit: habit));
           }
           if (value == "delete") {
             deleteFunction(habit.id);

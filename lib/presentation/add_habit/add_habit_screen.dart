@@ -6,28 +6,18 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
+import 'package:today_and_tomorrow/domain/habit/habit.dart';
 
 @RoutePage()
 class AddHabitScreen extends StatefulWidget {
-  const AddHabitScreen({super.key, this.editId});
-  final int? editId;
+  const AddHabitScreen({super.key, this.editHabit});
+  final Habit? editHabit;
   @override
   State<AddHabitScreen> createState() => _AddHabitScreenState();
 }
 
 class _AddHabitScreenState extends State<AddHabitScreen> {
   late FormGroup formGroup;
-  @override
-  void initState() {
-    initializeForm();
-    if (widget.editId != null) {
-      context.read<HabitBloc>().add(
-            HabitEvent.getHabitById(id: widget.editId!),
-          );
-    }
-
-    super.initState();
-  }
 
   void initializeForm() {
     formGroup = FormGroup(
@@ -39,6 +29,24 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     );
   }
 
+  void formPopulateFrom() {
+    formGroup.value = {
+      "name": widget.editHabit!.name,
+      "hour": widget.editHabit!.hour,
+      "endingHour": widget.editHabit?.endingHour,
+    };
+  }
+
+  @override
+  void initState() {
+    initializeForm();
+    if (widget.editHabit != null) {
+      formPopulateFrom();
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -46,20 +54,11 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     final habitBloc = context.watch<HabitBloc>();
     final habitState = habitBloc.state;
 
-    void formPopulateFrom(HabitState state) {
-      //todo use a better implementation
-      formGroup.value = {
-        "name": state.editableHabit!.name,
-        "hour": state.editableHabit!.hour,
-        "endingHour": state.editableHabit?.endingHour,
-      };
-    }
-
     void addHabit(BuildContext context,
         {required Map<String, dynamic> formData}) {
       habitBloc.add(HabitEvent.saveHabit(
         formData: formData,
-        id: widget.editId,
+        id: widget.editHabit?.id,
       ));
     }
 
@@ -81,13 +80,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 !prev.operationCompleted && current.operationCompleted,
             listener: (context, state) {
               context.router.maybePop();
-            },
-          ),
-          BlocListener<HabitBloc, HabitState>(
-            listenWhen: (prev, current) =>
-                prev.editableHabit == null && current.editableHabit != null,
-            listener: (context, state) {
-              formPopulateFrom(state);
             },
           ),
         ],
