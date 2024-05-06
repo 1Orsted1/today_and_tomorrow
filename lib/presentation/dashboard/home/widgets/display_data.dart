@@ -68,19 +68,20 @@ class DisplayData extends StatelessWidget {
       );
     }
 
-    Widget progressBar() {
+    Widget progressBar({required Habit habit}) {
+      final percentage = habit.getPercentage();
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LinearProgressIndicator(
-            value: 0.38,
+            value: percentage / 100,
             color: theme.colorScheme.primary,
             backgroundColor: theme.colorScheme.background,
             borderRadius: const BorderRadius.all(Radius.circular(32)),
             minHeight: 10,
           ),
           Text(
-            "35%",
+            "$percentage%",
             style: textStyle.bodySmall,
           ),
         ],
@@ -144,7 +145,6 @@ class DisplayData extends StatelessWidget {
                             size: 16,
                           ),
                           const Gap(4),
-                          //todo replace with a translations implementation
                           Text(
                             formatedInitialHour,
                             style: textStyle.labelMedium,
@@ -181,7 +181,7 @@ class DisplayData extends StatelessWidget {
                     StaggeredGridTile.count(
                       crossAxisCellCount: 18,
                       mainAxisCellCount: 3,
-                      child: Container(child: progressBar()),
+                      child: Container(child: progressBar(habit: habit)),
                     ),
                   ],
                 ),

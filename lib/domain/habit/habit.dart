@@ -83,15 +83,12 @@ class Habit {
 
   List<(int, DayStatus)> getDaysCompleted() {
     final today = DateTime.now();
-
-    /// dommie date
-
-    //final completedDays = [today, _addADay(dateTime: today)];
-
-    ///
     final week = _getDaysOfWeekFrom(today);
-    for (int i = 0; i < completedDays.length; i++) {
-      final completeDate = _convertFromIso(completedDays[i]);
+    final completedLenght = completedDays.length;
+    final last7CompletedDays = completedDays.sublist(
+        completedLenght > 7 ? completedLenght - 7 : 0, completedLenght);
+    for (int i = 0; i < last7CompletedDays.length; i++) {
+      final completeDate = _convertFromIso(last7CompletedDays[i]);
       if (completeDate.weekOfYear == today.weekOfYear) {
         final editIndex =
             week.indexWhere((element) => completeDate.day == element.$1);
@@ -107,12 +104,19 @@ class Habit {
     return week;
   }
 
+  double getPercentage() {
+    final today = DateTime.now();
+    final completedDaysL = completedDays.length;
+    var daysSinceCreated = today.difference(creationDate!).inDays + 1;
+    return ((completedDaysL / daysSinceCreated) * 100).roundToDouble();
+  }
+
   List<(int, DayStatus)> _getDaysOfWeekFrom(DateTime today) {
     final List<(int, DayStatus)> weekDays = [];
     final firstDayOfTheWeek = _findFirstDateOfTheWeek(today);
     final lastDayOfTheWeek = _findLastDateOfTheWeek(today);
     DateTime helperDay = firstDayOfTheWeek;
-    while (helperDay.isBefore(lastDayOfTheWeek)) {
+    while (helperDay.isBefore(_addADay(dateTime: lastDayOfTheWeek))) {
       weekDays.add(
         (
           helperDay.day,
@@ -131,9 +135,11 @@ class Habit {
     required DateTime evaluatedDay,
     required DateTime today,
   }) {
-    if (evaluatedDay.day < creationDate!.day) return DayStatus.beforeCreated;
-    if (evaluatedDay.day == today.day) return DayStatus.notCompletedToday;
-    if (evaluatedDay.day < today.day) return DayStatus.notCompleted;
+    if (evaluatedDay.isBefore(creationDate!)) return DayStatus.beforeCreated;
+    if (evaluatedDay.weekday.compareTo(today.weekday) == 0) {
+      return DayStatus.notCompletedToday;
+    }
+    if (evaluatedDay.isBefore(today)) return DayStatus.notCompleted;
     return DayStatus.incoming;
   }
 
