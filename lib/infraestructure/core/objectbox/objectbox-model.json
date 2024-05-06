@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:5908401262347548688",
-      "lastPropertyId": "4:4839355672167403760",
+      "lastPropertyId": "6:5606328496598617119",
       "name": "Habit",
       "properties": [
         {
@@ -28,6 +28,16 @@
           "id": "4:4839355672167403760",
           "name": "endingHour",
           "type": 10
+        },
+        {
+          "id": "5:5106971006442488531",
+          "name": "creationDate",
+          "type": 10
+        },
+        {
+          "id": "6:5606328496598617119",
+          "name": "completedDays",
+          "type": 30
         }
       ],
       "relations": []

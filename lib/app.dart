@@ -17,7 +17,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final _router = getIt<AppRouter>();
+  final router = getIt<AppRouter>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +46,11 @@ class _AppState extends State<App> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-
         builder: DevicePreview.appBuilder,
-        routerConfig: _router.config(),
+        routerConfig: router.config(
+            navigatorObservers: () => [
+                  NavigatorObserver(),
+                ]),
       ),
     );
   }

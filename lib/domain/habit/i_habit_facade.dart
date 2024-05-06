@@ -6,4 +6,5 @@ abstract class IHabitFacade {
   Stream<List<Habit>> getAllHabits();
   Future<bool> deleteHabit({required int id});
   Habit getHabitById({required int id});
+  Future<bool> updateHabit({required Habit habit});
 }

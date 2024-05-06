@@ -12,7 +12,7 @@ part 'habit_bloc.freezed.dart';
 @Injectable()
 class HabitBloc extends Bloc<HabitEvent, HabitState> {
   HabitBloc(IHabitFacade facade) : super(HabitState.initial()) {
-    on<_NewHabit>((event, emit) async {
+    on<_SaveHabit>((event, emit) async {
       try {
         emit(state.copyWith(isLoading: true, operationCompleted: false));
         //todo: handle errors and loading state
@@ -27,7 +27,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       return emit.forEach(facade.getAllHabits(),
           onData: (habitList) => state.copyWith(habitList: habitList));
     });
-
+    // todo: refactor this, because this may be not needed:
     on<_GetHabitById>((event, emit) {
       //todo: handle errors and loading state
       emit(state.copyWith(isLoading: true, editableHabit: null));
@@ -39,6 +39,13 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     on<_DeleteHabit>((event, emit) async {
       //todo: handle errors and loading state
       await facade.deleteHabit(id: event.id);
+    });
+
+    on<_UpdateHabit>((event, emit) async {
+      //todo: handle errors and loading state
+      final updatedHabit = event.updatedHabit;
+      updatedHabit.completeActivityToday();
+      await facade.updateHabit(habit: updatedHabit);
     });
   }
 }

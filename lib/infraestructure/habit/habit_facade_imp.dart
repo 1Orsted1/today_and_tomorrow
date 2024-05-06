@@ -19,7 +19,12 @@ class HabitFacadeImp implements IHabitFacade {
     int? editId,
   }) async {
     var habitFromJson = Habit.fromJson(newHabit);
-    if (editId != null) habitFromJson.updateId(newId: editId);
+    if (editId != null) {
+      final oldHabit = dataSource.getHabitById(id: editId);
+      habitFromJson.updateData(oldData: oldHabit);
+    } else {
+      habitFromJson.setCreationDate();
+    }
     return await dataSource.saveHabit(habitFromJson);
   }
 
@@ -36,5 +41,10 @@ class HabitFacadeImp implements IHabitFacade {
   @override
   Habit getHabitById({required int id}) {
     return dataSource.getHabitById(id: id);
+  }
+
+  @override
+  Future<bool> updateHabit({required Habit habit}) {
+    return dataSource.saveHabit(habit);
   }
 }
