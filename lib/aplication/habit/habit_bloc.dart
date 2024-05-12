@@ -28,7 +28,6 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
           onData: (habitList) => state.copyWith(habitList: habitList));
     });
     on<_DeleteHabit>((event, emit) async {
-      //todo: handle errors and loading state
       await facade.deleteHabit(id: event.id);
     });
 
