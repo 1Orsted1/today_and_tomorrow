@@ -9,8 +9,6 @@ class HabitEvent with _$HabitEvent {
 
   const factory HabitEvent.getAll() = _GetAllHabits;
 
-  const factory HabitEvent.getHabitById({required int id}) = _GetHabitById;
-
   const factory HabitEvent.delete({required int id}) = _DeleteHabit;
 
   const factory HabitEvent.updateHabit({required Habit updatedHabit}) =

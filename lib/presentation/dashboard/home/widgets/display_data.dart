@@ -22,50 +22,87 @@ class DisplayData extends StatelessWidget {
     if (habit.endingHour != null) {
       formatedEndHour = DateFormat.jm().format(habit.endingHour!);
     }
-    Widget dropDowmMenu() {
-      return DropdownButton<String>(
-        value: "menu",
-        icon: const SizedBox.shrink(),
-        elevation: 8,
-        underline: const SizedBox.shrink(),
-        onChanged: (String? value) {
-          if (value == "edit") {
-            context.router.push(AddHabitRoute(editId: habit.id));
-          }
-          if (value == "delete") {
-            deleteFunction(habit.id);
-          }
-        },
-        items: [
-          DropdownMenuItem(
-              value: "menu",
-              child: Center(
-                child: Icon(
-                  Icons.list,
-                  size: 18,
-                  color: theme.colorScheme.primary,
+
+    void triggerMenu() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            //your content
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 4,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Spacer(),
+                    Flexible(
+                      flex: 4,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.router.popAndPush(
+                            AddHabitRoute(
+                              editHabit: habit,
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: theme.colorScheme.background,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Editar",
+                                  style: theme.textTheme.titleMedium,
+                                ),
+                                Icon(
+                                  Icons.edit,
+                                  color: theme.colorScheme.secondary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: GestureDetector(
+                        onTap: () {
+                          deleteFunction(habit.id);
+                          context.router.maybePop();
+                        },
+                        child: Card(
+                          color: theme.colorScheme.background,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Eliminar",
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: theme.colorScheme.error,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.delete,
+                                  color: theme.colorScheme.error,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
                 ),
-              )),
-          DropdownMenuItem(
-              value: "edit",
-              child: Center(
-                child: Icon(
-                  Icons.edit,
-                  size: 18,
-                  color: theme.colorScheme.primary,
-                ),
-              )),
-          DropdownMenuItem(
-              value: "delete",
-              child: Center(
-                child: Icon(
-                  Icons.delete,
-                  size: 18,
-                  color: theme.colorScheme.primary,
-                ),
-              ))
-        ],
-      );
+              ),
+            );
+          });
     }
 
     Widget progressBar({required Habit habit}) {
@@ -89,106 +126,95 @@ class DisplayData extends StatelessWidget {
     }
 
     return Card(
-      child: Dismissible(
-        background: Container(
-          color: Colors.white,
-        ),
-        key: UniqueKey(),
-        onDismissed: (direction) {
-          deleteFunction(habit.id);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              behavior: SnackBarBehavior.floating,
-              margin: const EdgeInsets.only(bottom: 0, right: 70, left: 70),
-              padding: const EdgeInsets.all(5),
-              duration: const Duration(milliseconds: 800),
-              content: Container(
-                  alignment: Alignment.center,
-                  height: 35,
-                  child: Text('Task ${habit.id} deleted'))));
-        },
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-                child: StaggeredGrid.count(
-                  axisDirection: AxisDirection.down,
-                  crossAxisCount: 32,
-                  mainAxisSpacing: 1,
-                  crossAxisSpacing: 1,
-                  children: [
-                    //?title
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 29,
-                      mainAxisCellCount: 3,
-                      child: Text(
-                        habit.name,
-                        style: textStyle.titleMedium,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
+              child: StaggeredGrid.count(
+                axisDirection: AxisDirection.down,
+                crossAxisCount: 32,
+                mainAxisSpacing: 1,
+                crossAxisSpacing: 1,
+                children: [
+                  //?title
+                  StaggeredGridTile.count(
+                    crossAxisCellCount: 29,
+                    mainAxisCellCount: 3,
+                    child: Text(
+                      habit.name,
+                      style: textStyle.titleMedium,
+                    ),
+                  ),
+                  //?settings
+                  StaggeredGridTile.count(
+                    crossAxisCellCount: 3,
+                    mainAxisCellCount: 3,
+                    child: IconButton(
+                      onPressed: () => triggerMenu(),
+                      icon: Icon(
+                        Icons.list,
+                        color: theme.colorScheme.primary,
+                        size: 18,
                       ),
                     ),
-                    //?settings
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 3,
-                      mainAxisCellCount: 3,
-                      child: dropDowmMenu(),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 14,
-                      mainAxisCellCount: 2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.alarm,
-                            color: theme.colorScheme.secondary,
-                            size: 16,
-                          ),
-                          const Gap(4),
+                  ),
+                  StaggeredGridTile.count(
+                    crossAxisCellCount: 14,
+                    mainAxisCellCount: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.alarm,
+                          color: theme.colorScheme.secondary,
+                          size: 16,
+                        ),
+                        const Gap(4),
+                        Text(
+                          formatedInitialHour,
+                          style: textStyle.labelMedium,
+                        ),
+                        if (formatedEndHour != null)
                           Text(
-                            formatedInitialHour,
+                            ' - $formatedEndHour',
                             style: textStyle.labelMedium,
                           ),
-                          if (formatedEndHour != null)
-                            Text(
-                              ' - $formatedEndHour',
-                              style: textStyle.labelMedium,
-                            ),
-                        ],
-                      ),
+                      ],
                     ),
-                    //?week Widget
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 17,
-                      mainAxisCellCount: 7,
-                      child: WeekWidget(
-                        habit: habit,
-                      ),
+                  ),
+                  //?week Widget
+                  StaggeredGridTile.count(
+                    crossAxisCellCount: 17,
+                    mainAxisCellCount: 7,
+                    child: WeekWidget(
+                      habit: habit,
                     ),
-                    //?white space
-                    const StaggeredGridTile.count(
-                      crossAxisCellCount: 32,
-                      mainAxisCellCount: 1,
-                      child: SizedBox.shrink(),
-                    ),
-                    //?white space
-                    const StaggeredGridTile.count(
-                      crossAxisCellCount: 14,
-                      mainAxisCellCount: 1,
-                      child: SizedBox.shrink(),
-                    ),
-                    //?percentage of success
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 18,
-                      mainAxisCellCount: 3,
-                      child: Container(child: progressBar(habit: habit)),
-                    ),
-                  ],
-                ),
+                  ),
+                  //?white space
+                  const StaggeredGridTile.count(
+                    crossAxisCellCount: 32,
+                    mainAxisCellCount: 1,
+                    child: SizedBox.shrink(),
+                  ),
+                  //?white space
+                  const StaggeredGridTile.count(
+                    crossAxisCellCount: 14,
+                    mainAxisCellCount: 1,
+                    child: SizedBox.shrink(),
+                  ),
+                  //?percentage of success
+                  StaggeredGridTile.count(
+                    crossAxisCellCount: 18,
+                    mainAxisCellCount: 3,
+                    child: Container(child: progressBar(habit: habit)),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

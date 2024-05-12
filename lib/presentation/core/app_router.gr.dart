@@ -22,7 +22,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: AddHabitScreen(
           key: args.key,
-          editId: args.editId,
+          editHabit: args.editHabit,
         ),
       );
     },
@@ -58,13 +58,13 @@ abstract class _$AppRouter extends RootStackRouter {
 class AddHabitRoute extends PageRouteInfo<AddHabitRouteArgs> {
   AddHabitRoute({
     Key? key,
-    int? editId,
+    Habit? editHabit,
     List<PageRouteInfo>? children,
   }) : super(
           AddHabitRoute.name,
           args: AddHabitRouteArgs(
             key: key,
-            editId: editId,
+            editHabit: editHabit,
           ),
           initialChildren: children,
         );
@@ -78,16 +78,16 @@ class AddHabitRoute extends PageRouteInfo<AddHabitRouteArgs> {
 class AddHabitRouteArgs {
   const AddHabitRouteArgs({
     this.key,
-    this.editId,
+    this.editHabit,
   });
 
   final Key? key;
 
-  final int? editId;
+  final Habit? editHabit;
 
   @override
   String toString() {
-    return 'AddHabitRouteArgs{key: $key, editId: $editId}';
+    return 'AddHabitRouteArgs{key: $key, editHabit: $editHabit}';
   }
 }
 

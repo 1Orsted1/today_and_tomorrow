@@ -7,31 +7,27 @@ import 'package:today_and_tomorrow/presentation/dashboard/statistics/widgets/sta
 import 'package:today_and_tomorrow/presentation/dashboard/widgets/bottom_bar.dart';
 
 @RoutePage()
-class DashBoardScreen extends StatefulWidget {
+class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({super.key});
 
   @override
-  State<DashBoardScreen> createState() => _DashBoardScreenState();
-}
-
-class _DashBoardScreenState extends State<DashBoardScreen> {
-  PreferredSizeWidget _appBuilder(BuildContext context, TabsRouter tabsRouter) {
-    if (tabsRouter.activeIndex == 0) return statisticsAppBar();
-    if (tabsRouter.activeIndex == 1) return homeAppBar(context);
-    return goalAppBar();
-  }
-
-  Widget _botomNavigationWidget(BuildContext context, TabsRouter tabsRouter) {
-    return BottomBarD(
-      onTap: tabsRouter.setActiveIndex,
-      currentIndex: tabsRouter.activeIndex,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    PreferredSizeWidget appBuilder(
+        BuildContext context, TabsRouter tabsRouter) {
+      if (tabsRouter.activeIndex == 0) return statisticsAppBar();
+      if (tabsRouter.activeIndex == 1) return homeAppBar(context);
+      return goalAppBar();
+    }
+
+    Widget botomNavigationWidget(BuildContext context, TabsRouter tabsRouter) {
+      return BottomBarD(
+        onTap: tabsRouter.setActiveIndex,
+        currentIndex: tabsRouter.activeIndex,
+      );
+    }
+
     return AutoTabsScaffold(
-      appBarBuilder: _appBuilder,
+      appBarBuilder: appBuilder,
       animationDuration: const Duration(milliseconds: 300),
       animationCurve: Curves.decelerate,
       transitionBuilder: (context, child, animation) {
@@ -45,7 +41,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         HomeRoute(),
         GoalRoute(),
       ],
-      bottomNavigationBuilder: _botomNavigationWidget,
+      bottomNavigationBuilder: botomNavigationWidget,
     );
   }
 }

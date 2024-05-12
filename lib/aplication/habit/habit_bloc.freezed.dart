@@ -20,7 +20,6 @@ mixin _$HabitEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
     required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
   }) =>
@@ -29,7 +28,6 @@ mixin _$HabitEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
   }) =>
@@ -38,7 +36,6 @@ mixin _$HabitEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
     required TResult orElse(),
@@ -48,7 +45,6 @@ mixin _$HabitEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveHabit value) saveHabit,
     required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
   }) =>
@@ -57,7 +53,6 @@ mixin _$HabitEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveHabit value)? saveHabit,
     TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
   }) =>
@@ -66,7 +61,6 @@ mixin _$HabitEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveHabit value)? saveHabit,
     TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
     required TResult orElse(),
@@ -174,7 +168,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
     required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
   }) {
@@ -186,7 +179,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
   }) {
@@ -198,7 +190,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
     required TResult orElse(),
@@ -214,7 +205,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveHabit value) saveHabit,
     required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
   }) {
@@ -226,7 +216,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveHabit value)? saveHabit,
     TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
   }) {
@@ -238,7 +227,6 @@ class _$SaveHabitImpl implements _SaveHabit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveHabit value)? saveHabit,
     TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
     required TResult orElse(),
@@ -302,7 +290,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
     required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
   }) {
@@ -314,7 +301,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
   }) {
@@ -326,7 +312,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
     required TResult orElse(),
@@ -342,7 +327,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveHabit value) saveHabit,
     required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
   }) {
@@ -354,7 +338,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveHabit value)? saveHabit,
     TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
   }) {
@@ -366,7 +349,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveHabit value)? saveHabit,
     TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
     required TResult orElse(),
@@ -380,157 +362,6 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
 
 abstract class _GetAllHabits implements HabitEvent {
   const factory _GetAllHabits() = _$GetAllHabitsImpl;
-}
-
-/// @nodoc
-abstract class _$$GetHabitByIdImplCopyWith<$Res> {
-  factory _$$GetHabitByIdImplCopyWith(
-          _$GetHabitByIdImpl value, $Res Function(_$GetHabitByIdImpl) then) =
-      __$$GetHabitByIdImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int id});
-}
-
-/// @nodoc
-class __$$GetHabitByIdImplCopyWithImpl<$Res>
-    extends _$HabitEventCopyWithImpl<$Res, _$GetHabitByIdImpl>
-    implements _$$GetHabitByIdImplCopyWith<$Res> {
-  __$$GetHabitByIdImplCopyWithImpl(
-      _$GetHabitByIdImpl _value, $Res Function(_$GetHabitByIdImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_$GetHabitByIdImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetHabitByIdImpl implements _GetHabitById {
-  const _$GetHabitByIdImpl({required this.id});
-
-  @override
-  final int id;
-
-  @override
-  String toString() {
-    return 'HabitEvent.getHabitById(id: $id)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetHabitByIdImpl &&
-            (identical(other.id, id) || other.id == id));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetHabitByIdImplCopyWith<_$GetHabitByIdImpl> get copyWith =>
-      __$$GetHabitByIdImplCopyWithImpl<_$GetHabitByIdImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
-    required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
-    required TResult Function(int id) delete,
-    required TResult Function(Habit updatedHabit) updateHabit,
-  }) {
-    return getHabitById(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
-    TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
-    TResult? Function(int id)? delete,
-    TResult? Function(Habit updatedHabit)? updateHabit,
-  }) {
-    return getHabitById?.call(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
-    TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
-    TResult Function(int id)? delete,
-    TResult Function(Habit updatedHabit)? updateHabit,
-    required TResult orElse(),
-  }) {
-    if (getHabitById != null) {
-      return getHabitById(id);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_SaveHabit value) saveHabit,
-    required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
-    required TResult Function(_DeleteHabit value) delete,
-    required TResult Function(_UpdateHabit value) updateHabit,
-  }) {
-    return getHabitById(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SaveHabit value)? saveHabit,
-    TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
-    TResult? Function(_DeleteHabit value)? delete,
-    TResult? Function(_UpdateHabit value)? updateHabit,
-  }) {
-    return getHabitById?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SaveHabit value)? saveHabit,
-    TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
-    TResult Function(_DeleteHabit value)? delete,
-    TResult Function(_UpdateHabit value)? updateHabit,
-    required TResult orElse(),
-  }) {
-    if (getHabitById != null) {
-      return getHabitById(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetHabitById implements HabitEvent {
-  const factory _GetHabitById({required final int id}) = _$GetHabitByIdImpl;
-
-  int get id;
-  @JsonKey(ignore: true)
-  _$$GetHabitByIdImplCopyWith<_$GetHabitByIdImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -599,7 +430,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
     required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
   }) {
@@ -611,7 +441,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
   }) {
@@ -623,7 +452,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
     required TResult orElse(),
@@ -639,7 +467,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveHabit value) saveHabit,
     required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
   }) {
@@ -651,7 +478,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveHabit value)? saveHabit,
     TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
   }) {
@@ -663,7 +489,6 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveHabit value)? saveHabit,
     TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
     required TResult orElse(),
@@ -751,7 +576,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
     required TResult Function() getAll,
-    required TResult Function(int id) getHabitById,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
   }) {
@@ -763,7 +587,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult? Function()? getAll,
-    TResult? Function(int id)? getHabitById,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
   }) {
@@ -775,7 +598,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
     TResult Function()? getAll,
-    TResult Function(int id)? getHabitById,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
     required TResult orElse(),
@@ -791,7 +613,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult map<TResult extends Object?>({
     required TResult Function(_SaveHabit value) saveHabit,
     required TResult Function(_GetAllHabits value) getAll,
-    required TResult Function(_GetHabitById value) getHabitById,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
   }) {
@@ -803,7 +624,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SaveHabit value)? saveHabit,
     TResult? Function(_GetAllHabits value)? getAll,
-    TResult? Function(_GetHabitById value)? getHabitById,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
   }) {
@@ -815,7 +635,6 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SaveHabit value)? saveHabit,
     TResult Function(_GetAllHabits value)? getAll,
-    TResult Function(_GetHabitById value)? getHabitById,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
     required TResult orElse(),
@@ -843,6 +662,7 @@ mixin _$HabitState {
   bool get operationCompleted => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Habit? get editableHabit => throw _privateConstructorUsedError;
+  List<int> get waitingToComplete => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HabitStateCopyWith<HabitState> get copyWith =>
@@ -859,7 +679,8 @@ abstract class $HabitStateCopyWith<$Res> {
       {List<Habit> habitList,
       bool operationCompleted,
       bool isLoading,
-      Habit? editableHabit});
+      Habit? editableHabit,
+      List<int> waitingToComplete});
 }
 
 /// @nodoc
@@ -879,6 +700,7 @@ class _$HabitStateCopyWithImpl<$Res, $Val extends HabitState>
     Object? operationCompleted = null,
     Object? isLoading = null,
     Object? editableHabit = freezed,
+    Object? waitingToComplete = null,
   }) {
     return _then(_value.copyWith(
       habitList: null == habitList
@@ -897,6 +719,10 @@ class _$HabitStateCopyWithImpl<$Res, $Val extends HabitState>
           ? _value.editableHabit
           : editableHabit // ignore: cast_nullable_to_non_nullable
               as Habit?,
+      waitingToComplete: null == waitingToComplete
+          ? _value.waitingToComplete
+          : waitingToComplete // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -913,7 +739,8 @@ abstract class _$$HabitStateImplCopyWith<$Res>
       {List<Habit> habitList,
       bool operationCompleted,
       bool isLoading,
-      Habit? editableHabit});
+      Habit? editableHabit,
+      List<int> waitingToComplete});
 }
 
 /// @nodoc
@@ -931,6 +758,7 @@ class __$$HabitStateImplCopyWithImpl<$Res>
     Object? operationCompleted = null,
     Object? isLoading = null,
     Object? editableHabit = freezed,
+    Object? waitingToComplete = null,
   }) {
     return _then(_$HabitStateImpl(
       habitList: null == habitList
@@ -949,6 +777,10 @@ class __$$HabitStateImplCopyWithImpl<$Res>
           ? _value.editableHabit
           : editableHabit // ignore: cast_nullable_to_non_nullable
               as Habit?,
+      waitingToComplete: null == waitingToComplete
+          ? _value._waitingToComplete
+          : waitingToComplete // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -960,8 +792,10 @@ class _$HabitStateImpl implements _HabitState {
       {required final List<Habit> habitList,
       required this.operationCompleted,
       required this.isLoading,
-      this.editableHabit})
-      : _habitList = habitList;
+      this.editableHabit,
+      required final List<int> waitingToComplete})
+      : _habitList = habitList,
+        _waitingToComplete = waitingToComplete;
 
   final List<Habit> _habitList;
   @override
@@ -977,10 +811,18 @@ class _$HabitStateImpl implements _HabitState {
   final bool isLoading;
   @override
   final Habit? editableHabit;
+  final List<int> _waitingToComplete;
+  @override
+  List<int> get waitingToComplete {
+    if (_waitingToComplete is EqualUnmodifiableListView)
+      return _waitingToComplete;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_waitingToComplete);
+  }
 
   @override
   String toString() {
-    return 'HabitState(habitList: $habitList, operationCompleted: $operationCompleted, isLoading: $isLoading, editableHabit: $editableHabit)';
+    return 'HabitState(habitList: $habitList, operationCompleted: $operationCompleted, isLoading: $isLoading, editableHabit: $editableHabit, waitingToComplete: $waitingToComplete)';
   }
 
   @override
@@ -995,7 +837,9 @@ class _$HabitStateImpl implements _HabitState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.editableHabit, editableHabit) ||
-                other.editableHabit == editableHabit));
+                other.editableHabit == editableHabit) &&
+            const DeepCollectionEquality()
+                .equals(other._waitingToComplete, _waitingToComplete));
   }
 
   @override
@@ -1004,7 +848,8 @@ class _$HabitStateImpl implements _HabitState {
       const DeepCollectionEquality().hash(_habitList),
       operationCompleted,
       isLoading,
-      editableHabit);
+      editableHabit,
+      const DeepCollectionEquality().hash(_waitingToComplete));
 
   @JsonKey(ignore: true)
   @override
@@ -1018,7 +863,8 @@ abstract class _HabitState implements HabitState {
       {required final List<Habit> habitList,
       required final bool operationCompleted,
       required final bool isLoading,
-      final Habit? editableHabit}) = _$HabitStateImpl;
+      final Habit? editableHabit,
+      required final List<int> waitingToComplete}) = _$HabitStateImpl;
 
   @override
   List<Habit> get habitList;
@@ -1028,6 +874,8 @@ abstract class _HabitState implements HabitState {
   bool get isLoading;
   @override
   Habit? get editableHabit;
+  @override
+  List<int> get waitingToComplete;
   @override
   @JsonKey(ignore: true)
   _$$HabitStateImplCopyWith<_$HabitStateImpl> get copyWith =>

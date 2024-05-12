@@ -9,11 +9,6 @@ class HabitFacadeImp implements IHabitFacade {
   final IHabitDataSource dataSource;
 
   @override
-  Future<Habit> getHabit(int habitId) async {
-    return dataSource.getHabit(habitId);
-  }
-
-  @override
   Future<bool> saveHabit({
     required Map<String, dynamic> newHabit,
     int? editId,
@@ -36,11 +31,6 @@ class HabitFacadeImp implements IHabitFacade {
   @override
   Future<bool> deleteHabit({required int id}) async {
     return dataSource.deleteHabit(id: id);
-  }
-
-  @override
-  Habit getHabitById({required int id}) {
-    return dataSource.getHabitById(id: id);
   }
 
   @override

@@ -27,25 +27,22 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       return emit.forEach(facade.getAllHabits(),
           onData: (habitList) => state.copyWith(habitList: habitList));
     });
-    // todo: refactor this, because this may be not needed:
-    on<_GetHabitById>((event, emit) {
-      //todo: handle errors and loading state
-      emit(state.copyWith(isLoading: true, editableHabit: null));
-      final editableHabit = facade.getHabitById(id: event.id);
-      emit(state.copyWith(editableHabit: editableHabit));
-      emit(state.copyWith(isLoading: false));
-    });
-
     on<_DeleteHabit>((event, emit) async {
-      //todo: handle errors and loading state
       await facade.deleteHabit(id: event.id);
     });
 
     on<_UpdateHabit>((event, emit) async {
-      //todo: handle errors and loading state
+      var currentList = List<int>.from(state.waitingToComplete);
       final updatedHabit = event.updatedHabit;
-      updatedHabit.completeActivityToday();
-      await facade.updateHabit(habit: updatedHabit);
+      currentList.add(updatedHabit.id);
+      emit(state.copyWith(waitingToComplete: currentList));
+      try {
+        updatedHabit.completeActivityToday();
+        await facade.updateHabit(habit: updatedHabit);
+      } finally {
+        currentList.removeWhere((element) => element == updatedHabit.id);
+        emit(state.copyWith(waitingToComplete: currentList));
+      }
     });
   }
 }
