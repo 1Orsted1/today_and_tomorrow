@@ -66,7 +66,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
       backgroundColor: colorScheme.surface,
       appBar: AppBar(
         backgroundColor: colorScheme.background,
-        title: Text("Agregar habito"),
+        //! put this in translations
+        title: const Text("Agregar habito"),
         centerTitle: false,
         leading: IconButton(
           onPressed: () => context.router.maybePop(),
@@ -235,13 +236,14 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(horizontal: width * .2),
                           child: ElevatedButton(
-                              onPressed: form.valid && form.dirty
-                                  ? () {
-                                      //_addHabit(context, name: name, hour: hour);
-                                      addHabit(context, formData: form.value);
-                                    }
-                                  : null,
-                              child: Text("Save")),
+                            onPressed: form.valid && form.dirty
+                                ? () {
+                                    //_addHabit(context, name: name, hour: hour);
+                                    addHabit(context, formData: form.value);
+                                  }
+                                : null,
+                            child: const Text("Save"),
+                          ), //! put this in translations
                         );
                       },
                     ),

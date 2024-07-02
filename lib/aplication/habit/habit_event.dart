@@ -13,4 +13,6 @@ class HabitEvent with _$HabitEvent {
 
   const factory HabitEvent.updateHabit({required Habit updatedHabit}) =
       _UpdateHabit;
+
+  const factory HabitEvent.checkHabit() = _CheckHabit;
 }

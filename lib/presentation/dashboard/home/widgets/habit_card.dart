@@ -5,28 +5,33 @@ import 'package:today_and_tomorrow/domain/habit/habit.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/complete_habit_today.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/display_data.dart';
 
-class HabitCard extends StatelessWidget {
+class HabitCard extends StatefulWidget {
   const HabitCard({
     super.key,
     required this.habit,
   });
   final Habit habit;
 
+  @override
+  State<HabitCard> createState() => _HabitCardState();
+}
+
+class _HabitCardState extends State<HabitCard> {
   // Future<void> _delayedUpdate() async {
   @override
   Widget build(BuildContext context) {
     final habitBloc = context.watch<HabitBloc>();
     final currentDate = DateTime.now();
 
-    return habit.canCompleteChallenge(currentDate)
+    return habitBloc.state.waitingToComplete.contains(widget.habit.id)
         ? CompleteHabitToday(
-            habit: habit,
+            habit: widget.habit,
             completeFunction: (Habit habit) => habitBloc.add(
               HabitEvent.updateHabit(updatedHabit: habit),
             ),
           )
         : DisplayData(
-            habit: habit,
+            habit: widget.habit,
             deleteFunction: (int id) => habitBloc.add(
               HabitEvent.delete(id: id),
             ),

@@ -22,9 +22,9 @@ class CompleteHabitToday extends StatelessWidget {
     if (habit.endingHour != null) {
       formatedEndHour = DateFormat.jm().format(habit.endingHour!);
     }
-    return LoadingOverlay(
-      isLoading: bloc.state.waitingToComplete.contains(habit.id),
-      progressIndicator: const CircularProgressIndicator.adaptive(),
+    return Container(
+      width: double.maxFinite,
+      height: 150,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,8 @@ class CompleteHabitToday extends StatelessWidget {
                 onPressed: () {
                   completeFunction(habit);
                 },
-                child: Text("Completar hoy"),
+                //! put this in translations
+                child: const Text("Completar hoy"),
               ),
             ),
             const Gap(6),

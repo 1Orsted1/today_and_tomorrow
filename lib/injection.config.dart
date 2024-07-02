@@ -8,17 +8,20 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'aplication/habit/habit_bloc.dart' as _i9;
-import 'domain/habit/i_habit_data_source.dart' as _i5;
-import 'domain/habit/i_habit_facade.dart' as _i7;
-import 'infraestructure/core/objectbox/objectbox.g.dart' as _i4;
+import 'aplication/habit/habit_bloc.dart' as _i10;
+import 'domain/habit/i_habit_data_source.dart' as _i6;
+import 'domain/habit/i_habit_facade.dart' as _i8;
+import 'infraestructure/core/local_notifcations_module.dart' as _i11;
+import 'infraestructure/core/objectbox/objectbox.g.dart' as _i5;
 import 'infraestructure/core/objectbox/objectbox_injectable_module.dart'
-    as _i10;
-import 'infraestructure/habit/habit_data_source_imp.dart' as _i6;
-import 'infraestructure/habit/habit_facade_imp.dart' as _i8;
+    as _i12;
+import 'infraestructure/habit/habit_data_source_imp.dart' as _i7;
+import 'infraestructure/habit/habit_facade_imp.dart' as _i9;
 import 'presentation/core/app_router.dart' as _i3;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -32,19 +35,24 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
+    final localNotificationsModule = _$LocalNotificationsModule();
     final objectBoxInjectableModule = _$ObjectBoxInjectableModule();
     gh.factory<_i3.AppRouter>(() => _i3.AppRouter());
-    await gh.lazySingletonAsync<_i4.Store>(
+    gh.lazySingleton<_i4.FlutterLocalNotificationsPlugin>(
+        () => localNotificationsModule.flutterLocalNotificationsPlugin);
+    await gh.lazySingletonAsync<_i5.Store>(
       () => objectBoxInjectableModule.store,
       preResolve: true,
     );
-    gh.lazySingleton<_i5.IHabitDataSource>(
-        () => _i6.HabitDataSourceImp(gh<_i4.Store>()));
-    gh.factory<_i7.IHabitFacade>(
-        () => _i8.HabitFacadeImp(dataSource: gh<_i5.IHabitDataSource>()));
-    gh.factory<_i9.HabitBloc>(() => _i9.HabitBloc(gh<_i7.IHabitFacade>()));
+    gh.lazySingleton<_i6.IHabitDataSource>(
+        () => _i7.HabitDataSourceImp(gh<_i5.Store>()));
+    gh.factory<_i8.IHabitFacade>(
+        () => _i9.HabitFacadeImp(dataSource: gh<_i6.IHabitDataSource>()));
+    gh.factory<_i10.HabitBloc>(() => _i10.HabitBloc(gh<_i8.IHabitFacade>()));
     return this;
   }
 }
 
-class _$ObjectBoxInjectableModule extends _i10.ObjectBoxInjectableModule {}
+class _$LocalNotificationsModule extends _i11.LocalNotificationsModule {}
+
+class _$ObjectBoxInjectableModule extends _i12.ObjectBoxInjectableModule {}

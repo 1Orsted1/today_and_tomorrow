@@ -8,6 +8,7 @@ import '../core/objectbox/objectbox.g.dart';
 class HabitDataSourceImp implements IHabitDataSource {
   HabitDataSourceImp(this._store) : _habitBox = _store.box();
 
+  // ignore: unused_field
   final Store _store;
   final Box<Habit> _habitBox;
 

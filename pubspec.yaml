@@ -38,6 +38,9 @@ dependencies:
   l: ^4.0.2
   week_of_year: ^2.2.0
   flutter_local_notifications: ^17.1.2
+  device_info_plus: ^10.1.0
+  flutter_timezone: ^1.0.8
+  image: ^4.1.7
   
 
 dev_dependencies:

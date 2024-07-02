@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/goals/widgets/goal_app_bar.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/home_app_bar.dart';
@@ -7,8 +9,19 @@ import 'package:today_and_tomorrow/presentation/dashboard/statistics/widgets/sta
 import 'package:today_and_tomorrow/presentation/dashboard/widgets/bottom_bar.dart';
 
 @RoutePage()
-class DashBoardScreen extends StatelessWidget {
+class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
+
+  @override
+  State<DashBoardScreen> createState() => _DashBoardScreenState();
+}
+
+class _DashBoardScreenState extends State<DashBoardScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HabitBloc>().add(const HabitEvent.checkHabit());
+  }
 
   @override
   Widget build(BuildContext context) {

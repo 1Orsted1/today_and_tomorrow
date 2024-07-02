@@ -27,6 +27,18 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       return emit.forEach(facade.getAllHabits(),
           onData: (habitList) => state.copyWith(habitList: habitList));
     });
+
+    // _CheckHabit1
+    on<_CheckHabit>((event, emit) async {
+      return emit.forEach(facade.minuteStream(), onData: (habitList) {
+        final alreadyInList = state.waitingToComplete;
+        final updatedList = facade.getIdsToUpdate(
+            habitList: state.habitList, idsAlreadyInList: alreadyInList);
+        print(updatedList);
+        return state.copyWith(waitingToComplete: updatedList);
+      });
+    });
+
     on<_DeleteHabit>((event, emit) async {
       await facade.deleteHabit(id: event.id);
     });
