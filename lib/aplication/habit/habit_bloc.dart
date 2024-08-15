@@ -34,7 +34,6 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         final alreadyInList = state.waitingToComplete;
         final updatedList = facade.getIdsToUpdate(
             habitList: state.habitList, idsAlreadyInList: alreadyInList);
-        print(updatedList);
         return state.copyWith(waitingToComplete: updatedList);
       });
     });

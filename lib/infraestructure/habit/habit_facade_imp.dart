@@ -111,38 +111,43 @@ class HabitFacadeImp implements IHabitFacade {
       lastCompletedDate = DateTime.parse(habit.completedDays.last);
     }
 
-    final currentHour = today.hour;
-    final currentMinute = today.minute;
-    final startActivityHour = habit.hour.hour;
-    final startActivityMinute = habit.hour.minute;
+    final startH = habit.hour.hour;
+    final startM = habit.hour.minute;
+    final double startT = startH + startM * .100;
+    final double currentT = today.hour + today.minute * .100;
 
     if (lastCompletedDate?.day == today.day) return false;
     if (endingHour != null) {
-      final endActivityHour = endingHour.hour;
-      final endActivityMinute = endingHour.minute;
-
-      final currentMinuteValue = currentMinute + currentHour * 60;
-      final startActivityValue = startActivityMinute + startActivityHour * 60;
-      final endActivityValue = endActivityMinute + endActivityHour * 60;
-      if ((currentHour < startActivityHour ||
-          currentMinuteValue < startActivityValue)) return false;
-      if ((currentHour <= endActivityHour) &&
-          currentMinuteValue <= endActivityValue) {
-        return true;
+      int endH = endingHour.hour;
+      int endM = endingHour.minute;
+      final double endT = endH + endM * .100;
+      if (startT > endT) {
+        //alter validtion
+        return alterValidation(currentT, startT, endT);
+      } else {
+        //regular validation
+        return (currentT >= startT && currentT <= endT);
       }
     } else {
-      final plus15minDate = habit.hour.add(const Duration(minutes: 1));
-      final currentMinuteValue = (currentMinute + currentHour * 60);
-      final startActivityValue = startActivityMinute + startActivityHour * 60;
-
-      final endActivityValue = plus15minDate.minute + plus15minDate.hour * 60;
-      if ((currentHour < startActivityHour ||
-          currentMinuteValue < startActivityValue)) return false;
-      if (currentHour <= plus15minDate.hour &&
-          currentMinuteValue <= endActivityValue) {
-        return true;
+      DateTime plus15minDate = habit.hour.add(const Duration(minutes: 15));
+      int endH = plus15minDate.hour;
+      int endM = plus15minDate.minute;
+      final double endT = endH + endM * .100;
+      if (startT > endT) {
+        //alter validtion
+        return alterValidation(currentT, startT, endT);
+      } else {
+        //regular validation
+        return (currentT >= startT && currentT <= endT);
       }
     }
-    return false;
+  }
+
+  bool alterValidation(double totalH, initH, endH) {
+    if ((totalH >= initH)) {
+      return true;
+    } else {
+      return (totalH <= endH);
+    }
   }
 }

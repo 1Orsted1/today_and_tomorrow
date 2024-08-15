@@ -18,14 +18,46 @@ class AddHabitScreen extends StatefulWidget {
 
 class _AddHabitScreenState extends State<AddHabitScreen> {
   late FormGroup formGroup;
+  Map<String, dynamic>? _validateHour(AbstractControl<dynamic> control) {
+    if (control.value == null &&
+        (control.value?.hour <= 23 && control.value?.minute < 45)) {
+      return null; // No error
+    }
+    return {'maxDate': true};
+  }
 
   void initializeForm() {
     formGroup = FormGroup(
       {
         "name": FormControl<String>(validators: [Validators.required]),
-        "hour": FormControl<DateTime>(validators: [Validators.required]),
+        "hour": FormControl<DateTime>(validators: [
+          Validators.required,
+          //Validators.delegate(_validateHour),
+        ]),
         "endingHour": FormControl<DateTime>(),
       },
+      // validators: [
+      //   Validators.delegate((control) {
+      //     final x = control as FormGroup;
+      //     DateTime? a;
+      //     DateTime? b;
+      //     if (x.control("hour").value != null) {
+      //       a = x.control("hour").value as DateTime;
+      //     }
+      //     if (x.control("endingHour").value != null) {
+      //       b = x.control("endingHour").value as DateTime;
+      //     }
+      //     if (a == null) return null;
+
+      //     if (b == null) return null;
+
+      //     final difference = b.compareTo(a);
+      //     print("Diference = ${difference}");
+      //     if (difference == 1) return {'maxDate': true};
+      //     print("Diference = ${difference}");
+      //     return null;
+      //   })
+      //]
     );
   }
 
@@ -179,6 +211,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                   //width: MediaQuery.of(context).size.width / 2.5,
                                   child: ReactiveDateTimePicker(
                                     formControlName: 'endingHour',
+                                    validationMessages: {
+                                      'maxDate': (error) =>
+                                          'soy un error mirame!!!'
+                                    },
                                     type: ReactiveDatePickerFieldType.time,
                                     timePickerEntryMode:
                                         TimePickerEntryMode.inputOnly,
@@ -239,7 +275,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                             onPressed: form.valid && form.dirty
                                 ? () {
                                     //_addHabit(context, name: name, hour: hour);
-                                    addHabit(context, formData: form.value);
+                                    print(form.value);
+                                    //addHabit(context, formData: form.value);
                                   }
                                 : null,
                             child: const Text("Save"),
