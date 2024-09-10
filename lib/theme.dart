@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const colorScheme = ColorScheme.light(
-    primary: Color(0xffEF6364),
-    onPrimary: Color(0xFFFEF1EF),
-    secondary: Color(0xff256486),
-    surface: Color(0xFFFEF1EF),
-    background: Colors.white,
-    onBackground: Color(0xff256486),
-    secondaryContainer: Color(0xff256486),
+    primary: Color(0xff222831), //Color(0xffEF6364),
+    onPrimary: Color(0xFFEFF3FE),
+    secondary: Color(0xFFDC4600), //Color(0xff256486),
+    surface: Color(0xff31363F), //Color(0xFFFEF1EF),
+    onSurface: Color(0xFFEFF3FE),
+    background: Color(0xff222831), // Colors.white,
+    onBackground: Color(0xFFEFF3FE),
+    scrim: Colors.grey,
+    //secondaryContainer: Color(0xff256486),
   );
 
   static final appBarTheme = AppBarTheme(

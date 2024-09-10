@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
-import 'package:today_and_tomorrow/presentation/dashboard/goals/widgets/goal_app_bar.dart';
+import 'package:today_and_tomorrow/presentation/add_goals/widgets/goal_app_bar.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/home_app_bar.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/statistics/widgets/statistics_app_bar.dart';
 import 'package:today_and_tomorrow/presentation/dashboard/widgets/bottom_bar.dart';
@@ -14,9 +14,9 @@ class DashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     PreferredSizeWidget appBuilder(
         BuildContext context, TabsRouter tabsRouter) {
-      if (tabsRouter.activeIndex == 0) return statisticsAppBar();
-      if (tabsRouter.activeIndex == 1) return homeAppBar(context);
-      return goalAppBar();
+      if (tabsRouter.activeIndex == 0) return homeAppBar(context);
+      if (tabsRouter.activeIndex == 1) return statisticsAppBar();
+      return homeAppBar(context);
     }
 
     Widget botomNavigationWidget(BuildContext context, TabsRouter tabsRouter) {
@@ -37,9 +37,8 @@ class DashBoardScreen extends StatelessWidget {
         );
       },
       routes: const [
-        StatisticRoute(),
         HomeRoute(),
-        GoalRoute(),
+        StatisticRoute(),
       ],
       bottomNavigationBuilder: botomNavigationWidget,
     );
