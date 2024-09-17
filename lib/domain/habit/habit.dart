@@ -73,7 +73,6 @@ class Habit {
 
   void updateLastDayCompleted({required DateTime lastCompleted}) {
     lastCompletedDay = lastCompleted;
-    print(lastCompletedDay);
   }
 
   bool canCompleteChallenge(DateTime date) {

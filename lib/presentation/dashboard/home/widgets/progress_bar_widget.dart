@@ -20,12 +20,20 @@ class ProgressBarWidget extends StatelessWidget {
         ),
         const Gap(8),
         Expanded(
-          child: LinearProgressIndicator(
-            value: percentage / 100,
-            color: theme.colorScheme.secondary,
-            backgroundColor: theme.colorScheme.scrim,
-            borderRadius: const BorderRadius.all(Radius.circular(32)),
-            minHeight: 10,
+          child: TweenAnimationBuilder(
+            duration: const Duration(milliseconds: 350),
+            curve: Curves.easeInOut,
+            tween: Tween(
+              begin: 0,
+              end: percentage / 100,
+            ),
+            builder: (context, value, _) => LinearProgressIndicator(
+              value: value.toDouble(),
+              color: theme.colorScheme.secondary,
+              backgroundColor: theme.colorScheme.scrim,
+              borderRadius: const BorderRadius.all(Radius.circular(32)),
+              minHeight: 10,
+            ),
           ),
         ),
       ],
