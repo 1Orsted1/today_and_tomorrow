@@ -22,6 +22,7 @@ mixin _$HabitEvent {
     required TResult Function() getAll,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$HabitEvent {
     TResult? Function()? getAll,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$HabitEvent {
     TResult Function()? getAll,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$HabitEvent {
     required TResult Function(_GetAllHabits value) getAll,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$HabitEvent {
     TResult? Function(_GetAllHabits value)? getAll,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$HabitEvent {
     TResult Function(_GetAllHabits value)? getAll,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +176,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     required TResult Function() getAll,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
   }) {
     return saveHabit(formData, id);
   }
@@ -181,6 +188,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     TResult? Function()? getAll,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
   }) {
     return saveHabit?.call(formData, id);
   }
@@ -192,6 +200,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     TResult Function()? getAll,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
     required TResult orElse(),
   }) {
     if (saveHabit != null) {
@@ -207,6 +216,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     required TResult Function(_GetAllHabits value) getAll,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
   }) {
     return saveHabit(this);
   }
@@ -218,6 +228,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     TResult? Function(_GetAllHabits value)? getAll,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
   }) {
     return saveHabit?.call(this);
   }
@@ -229,6 +240,7 @@ class _$SaveHabitImpl implements _SaveHabit {
     TResult Function(_GetAllHabits value)? getAll,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
     required TResult orElse(),
   }) {
     if (saveHabit != null) {
@@ -292,6 +304,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     required TResult Function() getAll,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
   }) {
     return getAll();
   }
@@ -303,6 +316,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     TResult? Function()? getAll,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
   }) {
     return getAll?.call();
   }
@@ -314,6 +328,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     TResult Function()? getAll,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -329,6 +344,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     required TResult Function(_GetAllHabits value) getAll,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
   }) {
     return getAll(this);
   }
@@ -340,6 +356,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     TResult? Function(_GetAllHabits value)? getAll,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
   }) {
     return getAll?.call(this);
   }
@@ -351,6 +368,7 @@ class _$GetAllHabitsImpl implements _GetAllHabits {
     TResult Function(_GetAllHabits value)? getAll,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -432,6 +450,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     required TResult Function() getAll,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
   }) {
     return delete(id);
   }
@@ -443,6 +462,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     TResult? Function()? getAll,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
   }) {
     return delete?.call(id);
   }
@@ -454,6 +474,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     TResult Function()? getAll,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -469,6 +490,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     required TResult Function(_GetAllHabits value) getAll,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
   }) {
     return delete(this);
   }
@@ -480,6 +502,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     TResult? Function(_GetAllHabits value)? getAll,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
   }) {
     return delete?.call(this);
   }
@@ -491,6 +514,7 @@ class _$DeleteHabitImpl implements _DeleteHabit {
     TResult Function(_GetAllHabits value)? getAll,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -578,6 +602,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     required TResult Function() getAll,
     required TResult Function(int id) delete,
     required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
   }) {
     return updateHabit(updatedHabit);
   }
@@ -589,6 +614,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     TResult? Function()? getAll,
     TResult? Function(int id)? delete,
     TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
   }) {
     return updateHabit?.call(updatedHabit);
   }
@@ -600,6 +626,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     TResult Function()? getAll,
     TResult Function(int id)? delete,
     TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
     required TResult orElse(),
   }) {
     if (updateHabit != null) {
@@ -615,6 +642,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     required TResult Function(_GetAllHabits value) getAll,
     required TResult Function(_DeleteHabit value) delete,
     required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
   }) {
     return updateHabit(this);
   }
@@ -626,6 +654,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     TResult? Function(_GetAllHabits value)? getAll,
     TResult? Function(_DeleteHabit value)? delete,
     TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
   }) {
     return updateHabit?.call(this);
   }
@@ -637,6 +666,7 @@ class _$UpdateHabitImpl implements _UpdateHabit {
     TResult Function(_GetAllHabits value)? getAll,
     TResult Function(_DeleteHabit value)? delete,
     TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
     required TResult orElse(),
   }) {
     if (updateHabit != null) {
@@ -657,12 +687,165 @@ abstract class _UpdateHabit implements HabitEvent {
 }
 
 /// @nodoc
+abstract class _$$CompleteTaskImplCopyWith<$Res> {
+  factory _$$CompleteTaskImplCopyWith(
+          _$CompleteTaskImpl value, $Res Function(_$CompleteTaskImpl) then) =
+      __$$CompleteTaskImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Habit completeHabit});
+}
+
+/// @nodoc
+class __$$CompleteTaskImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$CompleteTaskImpl>
+    implements _$$CompleteTaskImplCopyWith<$Res> {
+  __$$CompleteTaskImplCopyWithImpl(
+      _$CompleteTaskImpl _value, $Res Function(_$CompleteTaskImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? completeHabit = null,
+  }) {
+    return _then(_$CompleteTaskImpl(
+      completeHabit: null == completeHabit
+          ? _value.completeHabit
+          : completeHabit // ignore: cast_nullable_to_non_nullable
+              as Habit,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CompleteTaskImpl implements _CompleteTask {
+  const _$CompleteTaskImpl({required this.completeHabit});
+
+  @override
+  final Habit completeHabit;
+
+  @override
+  String toString() {
+    return 'HabitEvent.completeTask(completeHabit: $completeHabit)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CompleteTaskImpl &&
+            (identical(other.completeHabit, completeHabit) ||
+                other.completeHabit == completeHabit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, completeHabit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CompleteTaskImplCopyWith<_$CompleteTaskImpl> get copyWith =>
+      __$$CompleteTaskImplCopyWithImpl<_$CompleteTaskImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Map<String, dynamic> formData, int? id) saveHabit,
+    required TResult Function() getAll,
+    required TResult Function(int id) delete,
+    required TResult Function(Habit updatedHabit) updateHabit,
+    required TResult Function(Habit completeHabit) completeTask,
+  }) {
+    return completeTask(completeHabit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Map<String, dynamic> formData, int? id)? saveHabit,
+    TResult? Function()? getAll,
+    TResult? Function(int id)? delete,
+    TResult? Function(Habit updatedHabit)? updateHabit,
+    TResult? Function(Habit completeHabit)? completeTask,
+  }) {
+    return completeTask?.call(completeHabit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Map<String, dynamic> formData, int? id)? saveHabit,
+    TResult Function()? getAll,
+    TResult Function(int id)? delete,
+    TResult Function(Habit updatedHabit)? updateHabit,
+    TResult Function(Habit completeHabit)? completeTask,
+    required TResult orElse(),
+  }) {
+    if (completeTask != null) {
+      return completeTask(completeHabit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SaveHabit value) saveHabit,
+    required TResult Function(_GetAllHabits value) getAll,
+    required TResult Function(_DeleteHabit value) delete,
+    required TResult Function(_UpdateHabit value) updateHabit,
+    required TResult Function(_CompleteTask value) completeTask,
+  }) {
+    return completeTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SaveHabit value)? saveHabit,
+    TResult? Function(_GetAllHabits value)? getAll,
+    TResult? Function(_DeleteHabit value)? delete,
+    TResult? Function(_UpdateHabit value)? updateHabit,
+    TResult? Function(_CompleteTask value)? completeTask,
+  }) {
+    return completeTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SaveHabit value)? saveHabit,
+    TResult Function(_GetAllHabits value)? getAll,
+    TResult Function(_DeleteHabit value)? delete,
+    TResult Function(_UpdateHabit value)? updateHabit,
+    TResult Function(_CompleteTask value)? completeTask,
+    required TResult orElse(),
+  }) {
+    if (completeTask != null) {
+      return completeTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CompleteTask implements HabitEvent {
+  const factory _CompleteTask({required final Habit completeHabit}) =
+      _$CompleteTaskImpl;
+
+  Habit get completeHabit;
+  @JsonKey(ignore: true)
+  _$$CompleteTaskImplCopyWith<_$CompleteTaskImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HabitState {
   List<Habit> get habitList => throw _privateConstructorUsedError;
   bool get operationCompleted => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Habit? get editableHabit => throw _privateConstructorUsedError;
-  List<int> get waitingToComplete => throw _privateConstructorUsedError;
+  List<String> get waitingToComplete => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HabitStateCopyWith<HabitState> get copyWith =>
@@ -680,7 +863,7 @@ abstract class $HabitStateCopyWith<$Res> {
       bool operationCompleted,
       bool isLoading,
       Habit? editableHabit,
-      List<int> waitingToComplete});
+      List<String> waitingToComplete});
 }
 
 /// @nodoc
@@ -722,7 +905,7 @@ class _$HabitStateCopyWithImpl<$Res, $Val extends HabitState>
       waitingToComplete: null == waitingToComplete
           ? _value.waitingToComplete
           : waitingToComplete // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -740,7 +923,7 @@ abstract class _$$HabitStateImplCopyWith<$Res>
       bool operationCompleted,
       bool isLoading,
       Habit? editableHabit,
-      List<int> waitingToComplete});
+      List<String> waitingToComplete});
 }
 
 /// @nodoc
@@ -780,7 +963,7 @@ class __$$HabitStateImplCopyWithImpl<$Res>
       waitingToComplete: null == waitingToComplete
           ? _value._waitingToComplete
           : waitingToComplete // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
     ));
   }
 }
@@ -793,7 +976,7 @@ class _$HabitStateImpl implements _HabitState {
       required this.operationCompleted,
       required this.isLoading,
       this.editableHabit,
-      required final List<int> waitingToComplete})
+      required final List<String> waitingToComplete})
       : _habitList = habitList,
         _waitingToComplete = waitingToComplete;
 
@@ -811,9 +994,9 @@ class _$HabitStateImpl implements _HabitState {
   final bool isLoading;
   @override
   final Habit? editableHabit;
-  final List<int> _waitingToComplete;
+  final List<String> _waitingToComplete;
   @override
-  List<int> get waitingToComplete {
+  List<String> get waitingToComplete {
     if (_waitingToComplete is EqualUnmodifiableListView)
       return _waitingToComplete;
     // ignore: implicit_dynamic_type
@@ -864,7 +1047,7 @@ abstract class _HabitState implements HabitState {
       required final bool operationCompleted,
       required final bool isLoading,
       final Habit? editableHabit,
-      required final List<int> waitingToComplete}) = _$HabitStateImpl;
+      required final List<String> waitingToComplete}) = _$HabitStateImpl;
 
   @override
   List<Habit> get habitList;
@@ -875,7 +1058,7 @@ abstract class _HabitState implements HabitState {
   @override
   Habit? get editableHabit;
   @override
-  List<int> get waitingToComplete;
+  List<String> get waitingToComplete;
   @override
   @JsonKey(ignore: true)
   _$$HabitStateImplCopyWith<_$HabitStateImpl> get copyWith =>

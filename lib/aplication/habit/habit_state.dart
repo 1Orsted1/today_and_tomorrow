@@ -7,7 +7,7 @@ class HabitState with _$HabitState {
     required bool operationCompleted,
     required bool isLoading,
     Habit? editableHabit,
-    required List<int> waitingToComplete,
+    required List<String> waitingToComplete,
   }) = _HabitState;
 
   factory HabitState.initial() => const HabitState(

@@ -1,14 +1,20 @@
 import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
+
 import 'package:today_and_tomorrow/domain/habit/habit.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
-import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/week_widget.dart';
+import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/complete_task_button.dart';
+import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/progress_bar_widget.dart';
+import 'package:today_and_tomorrow/presentation/dashboard/home/widgets/time_widget.dart';
 
-class DisplayData extends StatelessWidget {
-  const DisplayData(
+class HabitCardWidget extends StatelessWidget {
+  const HabitCardWidget(
       {super.key, required this.habit, required this.deleteFunction});
   final Habit habit;
   final Function(int id) deleteFunction;
@@ -17,11 +23,17 @@ class DisplayData extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme;
-    final formatedInitialHour = DateFormat.jm().format(habit.hour);
-    String? formatedEndHour;
-    if (habit.endingHour != null) {
-      formatedEndHour = DateFormat.jm().format(habit.endingHour!);
-    }
+    final width = MediaQuery.of(context).size.width;
+    final bloc = context.watch<HabitBloc>();
+    final completedToday = habit.lastCompletedDay ==
+        DateTime.now().copyWith(
+          year: 0,
+          hour: 0,
+          minute: 0,
+          second: 0,
+          millisecond: 0,
+          microsecond: 0,
+        );
 
     void triggerMenu() {
       showModalBottomSheet(
@@ -105,27 +117,62 @@ class DisplayData extends StatelessWidget {
           });
     }
 
-    Widget progressBar({required Habit habit}) {
-      final percentage = habit.getPercentage();
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LinearProgressIndicator(
-            value: percentage / 100,
-            color: theme.colorScheme.primary,
-            backgroundColor: theme.colorScheme.background,
-            borderRadius: const BorderRadius.all(Radius.circular(32)),
-            minHeight: 10,
-          ),
-          Text(
-            "$percentage%",
-            style: textStyle.bodySmall,
-          ),
-        ],
-      );
+    void onTapEvent() {
+      bloc.add(HabitEvent.completeTask(completeHabit: habit));
     }
 
-    return Card(
+    return Container(
+      width: double.maxFinite,
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  habit.name.toUpperCase(),
+                  style: textStyle.titleMedium
+                      ?.copyWith(color: theme.colorScheme.onPrimary),
+                ),
+                const Gap(8),
+                TimeWidget(
+                  timeData: habit.hour,
+                  endTimeData: habit.endingHour,
+                ),
+                const Gap(8),
+                SizedBox(
+                  width: width / 2.5,
+                  child: ProgressBarWidget(
+                    percentage: habit.getPercentage(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 75,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0, top: 8.0),
+                  child: CompleteTaskButton(
+                    completeFunction: () => onTapEvent(),
+                    isCompletedToday: completedToday,
+                    habit: habit,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    /*
+     Card(
       child: Row(
         children: <Widget>[
           Expanded(
@@ -217,5 +264,7 @@ class DisplayData extends StatelessWidget {
         ],
       ),
     );
+    
+     */
   }
 }

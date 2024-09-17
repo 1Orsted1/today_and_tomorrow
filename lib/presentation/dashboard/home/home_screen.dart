@@ -15,8 +15,12 @@ class HomeScreen extends StatelessWidget {
 
     Widget Function(BuildContext, int) itemBuilder(List<Habit> rawList) {
       final habits = rawList.reversed.toList();
-      return (BuildContext context, int index) =>
-          HabitCard(habit: habits[index]);
+      return (BuildContext context, int index) => Column(
+            children: [
+              HabitCard(habit: habits[index]),
+              const Divider(),
+            ],
+          );
     }
 
     return Scaffold(
@@ -42,11 +46,14 @@ class HomeScreen extends StatelessWidget {
                   ],
                 );
               } else {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    itemCount: snapshot.hasData ? snapshot.data!.length : 0,
-                    itemBuilder: itemBuilder(snapshot.data ?? []));
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      itemCount: snapshot.hasData ? snapshot.data!.length : 0,
+                      itemBuilder: itemBuilder(snapshot.data ?? [])),
+                );
               }
             }),
       ),
