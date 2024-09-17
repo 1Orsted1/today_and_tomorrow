@@ -28,6 +28,10 @@ class Habit {
   @JsonKey(readValue: readValue)
   DateTime? creationDate;
 
+  @Property(type: PropertyType.date)
+  @JsonKey(readValue: readValue)
+  DateTime? lastCompletedDay;
+
   @JsonKey(defaultValue: [])
   List<String> completedDays = [];
 
@@ -65,6 +69,10 @@ class Habit {
 
   void completeActivityToday() {
     completedDays.add(DateTime.now().toIso8601String());
+  }
+
+  void updateLastDayCompleted({required DateTime lastCompleted}) {
+    lastCompletedDay = lastCompleted;
   }
 
   bool canCompleteChallenge(DateTime date) {
@@ -108,7 +116,9 @@ class Habit {
     final today = DateTime.now();
     final completedDaysL = completedDays.length;
     var daysSinceCreated = today.difference(creationDate!).inDays + 1;
-    return ((completedDaysL / daysSinceCreated) * 100).roundToDouble();
+    return ((completedDaysL / daysSinceCreated) * 100)
+        .roundToDouble()
+        .clamp(0.0, 100.0);
   }
 
   List<(int, DayStatus)> _getDaysOfWeekFrom(DateTime today) {

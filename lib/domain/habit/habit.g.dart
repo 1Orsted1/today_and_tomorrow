@@ -17,6 +17,9 @@ Habit _$HabitFromJson(Map<String, dynamic> json) => Habit(
       ..creationDate = Habit.readValue(json, 'creationDate') == null
           ? null
           : DateTime.parse(Habit.readValue(json, 'creationDate') as String)
+      ..lastCompletedDay = Habit.readValue(json, 'lastCompletedDay') == null
+          ? null
+          : DateTime.parse(Habit.readValue(json, 'lastCompletedDay') as String)
       ..completedDays = (json['completedDays'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -28,5 +31,6 @@ Map<String, dynamic> _$HabitToJson(Habit instance) => <String, dynamic>{
       'hour': instance.hour.toIso8601String(),
       'endingHour': instance.endingHour?.toIso8601String(),
       'creationDate': instance.creationDate?.toIso8601String(),
+      'lastCompletedDay': instance.lastCompletedDay?.toIso8601String(),
       'completedDays': instance.completedDays,
     };

@@ -32,16 +32,43 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     });
 
     on<_UpdateHabit>((event, emit) async {
-      var currentList = List<int>.from(state.waitingToComplete);
+      emit(state.copyWith(isLoading: true));
+      var currentList = List<String>.from(state.waitingToComplete);
       final updatedHabit = event.updatedHabit;
-      currentList.add(updatedHabit.id);
+      currentList.add(updatedHabit.id.toString());
       emit(state.copyWith(waitingToComplete: currentList));
       try {
         updatedHabit.completeActivityToday();
         await facade.updateHabit(habit: updatedHabit);
       } finally {
-        currentList.removeWhere((element) => element == updatedHabit.id);
-        emit(state.copyWith(waitingToComplete: currentList));
+        currentList
+            .removeWhere((element) => element == updatedHabit.id.toString());
+        emit(state.copyWith(waitingToComplete: currentList, isLoading: false));
+      }
+    });
+    on<_CompleteTask>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+      var currentList = List<String>.from(state.waitingToComplete);
+      final updatedHabit = event.completeHabit;
+      currentList.add(updatedHabit.id.toString());
+      emit(state.copyWith(waitingToComplete: currentList));
+      try {
+        updatedHabit.completeActivityToday();
+        updatedHabit.updateLastDayCompleted(
+          lastCompleted: DateTime.now().copyWith(
+            year: 0,
+            hour: 0,
+            minute: 0,
+            second: 0,
+            millisecond: 0,
+            microsecond: 0,
+          ),
+        );
+        await facade.updateHabit(habit: updatedHabit);
+      } finally {
+        currentList
+            .removeWhere((element) => element == updatedHabit.id.toString());
+        emit(state.copyWith(waitingToComplete: currentList, isLoading: false));
       }
     });
   }

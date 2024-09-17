@@ -42,5 +42,10 @@
 		"editor.wordBasedSuggestions": "off",
 	},
 	"cmake.configureOnOpen": true,
-	"cmake.sourceDirectory": "/Users/felipetlaxcala/workspace/mobile_development/flutterApp/today_and_tomorrow/linux"
+	"cmake.sourceDirectory": "/Users/felipetlaxcala/workspace/mobile_development/flutterApp/today_and_tomorrow/linux",
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#1E3301",
+		"titleBar.activeBackground": "#2A4802",
+		"titleBar.activeForeground": "#F2FEE0"
+	}
 }

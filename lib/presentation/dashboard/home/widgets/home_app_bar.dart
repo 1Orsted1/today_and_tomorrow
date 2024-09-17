@@ -6,6 +6,8 @@ import 'package:today_and_tomorrow/presentation/core/app_router.dart';
 AppBar homeAppBar(BuildContext context) {
   final dateToday = DateFormat.yMMMd().format(DateTime.now());
   return AppBar(
+    backgroundColor: Theme.of(context).colorScheme.background,
+    elevation: 0,
     centerTitle: false,
     title: Text(dateToday.toString()),
     actions: [
