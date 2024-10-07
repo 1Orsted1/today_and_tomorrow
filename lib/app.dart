@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:today_and_tomorrow/aplication/habit/habit_bloc.dart';
 import 'package:today_and_tomorrow/i18n/strings.g.dart';
+import 'package:today_and_tomorrow/infraestructure/core/navigator_observer.dart';
 import 'package:today_and_tomorrow/injection.dart';
 import 'package:today_and_tomorrow/presentation/core/app_router.dart';
 
@@ -18,7 +19,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final router = getIt<AppRouter>();
-
+  final _observer = MyObserver();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -48,9 +49,10 @@ class _AppState extends State<App> {
         ],
         builder: DevicePreview.appBuilder,
         routerConfig: router.config(
-            navigatorObservers: () => [
-                  NavigatorObserver(),
-                ]),
+          navigatorObservers: () => [
+            _observer,
+          ],
+        ),
       ),
     );
   }

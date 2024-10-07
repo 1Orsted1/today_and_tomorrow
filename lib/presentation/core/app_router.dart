@@ -17,7 +17,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(initial: true, page: DashBoardRoute.page, children: [
           AutoRoute(page: HomeRoute.page, initial: true),
-          AutoRoute(page: StatisticRoute.page),
+          AutoRoute(page: StatisticRoute.page, path: "statistics"),
         ]),
         AutoRoute(page: AddHabitRoute.page),
         AutoRoute(page: AddGoalRoute.page),
