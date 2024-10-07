@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ProgressBarWidget extends StatelessWidget {
-  const ProgressBarWidget({super.key, required this.percentage});
+  const ProgressBarWidget({
+    super.key,
+    required this.percentage,
+    this.showPercentage = true,
+  });
   final double percentage;
+  final bool showPercentage;
 
   @override
   Widget build(BuildContext context) {
@@ -12,13 +17,16 @@ class ProgressBarWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "$percentage%",
-          style: textStyle.bodyMedium?.copyWith(
-            color: theme.colorScheme.onPrimary,
+        if (showPercentage)
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Text(
+              "$percentage%",
+              style: textStyle.bodyMedium?.copyWith(
+                color: theme.colorScheme.onPrimary,
+              ),
+            ),
           ),
-        ),
-        const Gap(8),
         Expanded(
           child: TweenAnimationBuilder(
             duration: const Duration(milliseconds: 350),

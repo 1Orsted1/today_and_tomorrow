@@ -24,7 +24,7 @@ class _GoalScreen extends State<AddGoalScreen> {
       body: FormWrapper(
         step: 2,
         maxStep: 5,
-        control: 'dummie',
+        currentControllName: 'dummie',
         onDone: () {},
         onBack: () {},
         formGroup: formGroup,

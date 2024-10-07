@@ -8,7 +8,7 @@ class FormWrapper extends StatelessWidget {
     super.key,
     required this.step,
     required this.maxStep,
-    required this.control,
+    required this.currentControllName,
     required this.onDone,
     required this.onBack,
     required this.child,
@@ -16,7 +16,7 @@ class FormWrapper extends StatelessWidget {
   });
   final int step;
   final int maxStep;
-  final String control;
+  final String currentControllName;
   final FormGroup formGroup;
   final VoidCallback onDone;
   final VoidCallback onBack;
@@ -38,44 +38,53 @@ class FormWrapper extends StatelessWidget {
         leading: BackButton(
           onPressed: () => onBack,
         ),
-        actions: [Text("$step/$maxStep"), Gap(12)],
+        actions: [Text("$step/$maxStep"), const Gap(12)],
       ),
-      body: SizedBox(
-        height: double.maxFinite,
-        child: Column(
-          children: [
-            //5 = 100 %
-            //2 = progress
+      body: SafeArea(
+        child: SizedBox(
+          height: double.maxFinite,
+          child: Column(
+            children: [
+              //5 = 100 %
+              //2 = progress
 
-            ProgressBarWidget(
-                percentage: ((100 / maxStep) * step).clamp(0, 100)),
-            ReactiveForm(
-              formGroup: formGroup,
-              child: Column(
-                children: [
-                  child,
-                ],
+              ProgressBarWidget(
+                  showPercentage: false,
+                  percentage: ((100 / maxStep) * step).clamp(0, 100)),
+              Flexible(
+                child: ReactiveForm(
+                  formGroup: formGroup,
+                  child: Column(
+                    children: [
+                      child,
+                    ],
+                  ),
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () =>
-                        formGroup.control(control).invalid ? null : onDone,
-                    child: const Text("skip"),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () =>
+                          formGroup.control(currentControllName).invalid
+                              ? null
+                              : onDone,
+                      child: const Text("skip"),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () =>
-                        formGroup.control(control).invalid ? null : onDone,
-                    child: Text(step == maxStep ? "Terminar" : "Continuar"),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () =>
+                          formGroup.control(currentControllName).invalid
+                              ? null
+                              : onDone,
+                      child: Text(step == maxStep ? "Terminar" : "Continuar"),
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

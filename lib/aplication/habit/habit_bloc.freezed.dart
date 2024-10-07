@@ -90,6 +90,9 @@ class _$HabitEventCopyWithImpl<$Res, $Val extends HabitEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -109,6 +112,8 @@ class __$$SaveHabitImplCopyWithImpl<$Res>
       _$SaveHabitImpl _value, $Res Function(_$SaveHabitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,7 +168,9 @@ class _$SaveHabitImpl implements _SaveHabit {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_formData), id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveHabitImplCopyWith<_$SaveHabitImpl> get copyWith =>
@@ -257,7 +264,10 @@ abstract class _SaveHabit implements HabitEvent {
 
   Map<String, dynamic> get formData;
   int? get id;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveHabitImplCopyWith<_$SaveHabitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -276,6 +286,9 @@ class __$$GetAllHabitsImplCopyWithImpl<$Res>
   __$$GetAllHabitsImplCopyWithImpl(
       _$GetAllHabitsImpl _value, $Res Function(_$GetAllHabitsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -399,6 +412,8 @@ class __$$DeleteHabitImplCopyWithImpl<$Res>
       _$DeleteHabitImpl _value, $Res Function(_$DeleteHabitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -437,7 +452,9 @@ class _$DeleteHabitImpl implements _DeleteHabit {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteHabitImplCopyWith<_$DeleteHabitImpl> get copyWith =>
@@ -528,7 +545,10 @@ abstract class _DeleteHabit implements HabitEvent {
   const factory _DeleteHabit({required final int id}) = _$DeleteHabitImpl;
 
   int get id;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteHabitImplCopyWith<_$DeleteHabitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -550,6 +570,8 @@ class __$$UpdateHabitImplCopyWithImpl<$Res>
       _$UpdateHabitImpl _value, $Res Function(_$UpdateHabitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -589,7 +611,9 @@ class _$UpdateHabitImpl implements _UpdateHabit {
   @override
   int get hashCode => Object.hash(runtimeType, updatedHabit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateHabitImplCopyWith<_$UpdateHabitImpl> get copyWith =>
@@ -681,7 +705,10 @@ abstract class _UpdateHabit implements HabitEvent {
       _$UpdateHabitImpl;
 
   Habit get updatedHabit;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateHabitImplCopyWith<_$UpdateHabitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -703,6 +730,8 @@ class __$$CompleteTaskImplCopyWithImpl<$Res>
       _$CompleteTaskImpl _value, $Res Function(_$CompleteTaskImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -742,7 +771,9 @@ class _$CompleteTaskImpl implements _CompleteTask {
   @override
   int get hashCode => Object.hash(runtimeType, completeHabit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CompleteTaskImplCopyWith<_$CompleteTaskImpl> get copyWith =>
@@ -834,7 +865,10 @@ abstract class _CompleteTask implements HabitEvent {
       _$CompleteTaskImpl;
 
   Habit get completeHabit;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CompleteTaskImplCopyWith<_$CompleteTaskImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -847,7 +881,9 @@ mixin _$HabitState {
   Habit? get editableHabit => throw _privateConstructorUsedError;
   List<String> get waitingToComplete => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HabitStateCopyWith<HabitState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -876,6 +912,8 @@ class _$HabitStateCopyWithImpl<$Res, $Val extends HabitState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -934,6 +972,8 @@ class __$$HabitStateImplCopyWithImpl<$Res>
       _$HabitStateImpl _value, $Res Function(_$HabitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1034,7 +1074,9 @@ class _$HabitStateImpl implements _HabitState {
       editableHabit,
       const DeepCollectionEquality().hash(_waitingToComplete));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HabitStateImplCopyWith<_$HabitStateImpl> get copyWith =>
@@ -1059,8 +1101,11 @@ abstract class _HabitState implements HabitState {
   Habit? get editableHabit;
   @override
   List<String> get waitingToComplete;
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HabitStateImplCopyWith<_$HabitStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
